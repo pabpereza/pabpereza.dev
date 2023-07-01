@@ -1,0 +1,362 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Pabpereza - DevSecOps – Blog</title><link>/blog/</link><description>Recent content in Blog on Pabpereza - DevSecOps</description><generator>Hugo -- gohugo.io</generator><atom:link href="/blog/index.xml" rel="self" type="application/rss+xml"/><item><title>Blog: Aligerar imágenes Docker</title><link>/blog/2023/03/08/aligerar-im%C3%A1genes-docker/</link><pubDate>Wed, 08 Mar 2023 00:00:00 +0000</pubDate><guid>/blog/2023/03/08/aligerar-im%C3%A1genes-docker/</guid><description>
+&lt;img src="/blog/2023/03/08/aligerar-im%C3%A1genes-docker/featured_docker_images_multi_stage_hua19f126b9d6357f311725491af52ae34_666875_640x0_resize_catmullrom_3.png" width="640" height="360"/>
+&lt;p>En el mundo de la infraestructura como código, Docker se ha convertido en una herramienta esencial para desarrolladores y administradores de sistemas. Una de las ventajas de Docker es la capacidad de crear imágenes ligeras, lo que permite un despliegue rápido y eficiente de aplicaciones.&lt;/p>
+&lt;p>Existen casos, ya sea por la complejidad de la aplicación, la cantidad de paquetes instalados o la cantidad de archivos, en los que las imágenes Docker pueden llegar a ser muy pesadas. Esto puede afectar muy negativamente el rendimiento y la eficiencia de los automatismos de construcción, pruebas y despliegue.&lt;/p>
+&lt;p>En este artículo, vamos a explorar cómo crear imágenes de Docker ligeras para optimizar el rendimiento y la eficiencia en el despliegue de aplicaciones.&lt;/p>
+&lt;p>Por si lo prefieres, puedes ver el vídeo en YouTube:&lt;/p>
+&lt;div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+&lt;iframe src="https://www.youtube.com/embed/QVcLTxmcJ8s" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video">&lt;/iframe>
+&lt;/div>
+&lt;h2 id="paso-1-utilizar-una-imagen-base-pequeña">Paso 1: Utilizar una imagen base pequeña&lt;/h2>
+&lt;p>La primera etapa en la creación de una imagen de Docker ligera es elegir una imagen base pequeña. Esto significa elegir una imagen que tenga el menor tamaño posible y solo contenga los componentes esenciales para ejecutar la aplicación. Por ejemplo, dentro de las imágenes de debian, podemos optar por las versiones con tag &amp;ldquo;-slim&amp;rdquo; (debian:11-slim) las cuales traen muchos menos paquetes por defecto.&lt;/p>
+&lt;p>Otras imágenes que se han vuelto muy populares los últimos años son las de Alpine Linux. Estas tienen un tamaño minúsculo y tienen un sistema de paquetes muy poblado y bien mantenido.&lt;/p>
+&lt;h2 id="paso-2-eliminar-archivos-no-necesarios">Paso 2: Eliminar archivos no necesarios&lt;/h2>
+&lt;p>Una vez que tenemos nuestra imagen base, es importante eliminar cualquier archivo o paquete que no sea necesario para la ejecución de la aplicación. Esto puede incluir documentación, archivos de configuración y aplicaciones adicionales.&lt;/p>
+&lt;p>Un caso práctico, construyo una aplicación Java con Maven y luego utilizo una imagen base de OpenJDK para ejecutar la aplicación. En este caso, Maven no es necesario para la ejecución de la aplicación, por lo que puedo eliminarlo de la imagen. Esto sería extrapolable a npm para aplicaciones Node.js, pip para aplicaciones Python, etc.&lt;/p>
+&lt;p>Tenemos que pensar que solo tenemos que dejar lo esencial para que la aplicación funcione. Esto no es solo una cuestión de optimización, sino también de seguridad. Si dejamos archivos o paquetes innecesarios en la imagen, podemos estar expuestos a vulnerabilidades debido a aumentar la superficie de ataque.&lt;/p>
+&lt;h2 id="paso-3-utilizar-multi-etapas-de-construcción">Paso 3: Utilizar multi-etapas de construcción&lt;/h2>
+&lt;p>La característica de multi-etapas de construcción de Docker nos permite utilizar varias imágenes en una sola definición de construcción. Esto significa que podemos utilizar una imagen base para compilar nuestra aplicación y luego utilizar otra imagen base más pequeña para desplegar la aplicación. Esto nos permite eliminar cualquier paquete o archivo no necesario utilizado solo en la etapa de compilación.&lt;/p>
+&lt;p>Tengo una &lt;a href="https://youtube.com/playlist?list=PLQhxXeq1oc2mB6_KY-l_zgWJWZo_ne9MZ">lista de vídeos en youtube hablando del tema&lt;/a> y también &lt;a href="https://github.com/pabpereza/multi-stage-containers-examples">un repositorio con varios ejemplos&lt;/a>.&lt;/p>
+&lt;h2 id="post-paso-1-monitorizar-el-rendimiento-de-la-imagen">Post-paso 1: Monitorizar el rendimiento de la imagen.&lt;/h2>
+&lt;p>Algunos errores de optimización no serán visibles hasta que la imagen se ejecute en un entorno de producción. Por lo tanto, es importante monitorizar el rendimiento de la imagen una vez que se haya desplegado en producción. Esto nos permitirá identificar cualquier problema de rendimiento y optimizar la imagen de forma proactiva.&lt;/p>
+&lt;p>Aquí podríamos vigilar que no se escriban demasiados archivos en el disco, que no se consuma demasiada memoria, que no se consuma demasiado ancho de banda, etc.&lt;/p>
+&lt;p>El comando &lt;code>docker stats&lt;/code> nos permite realizar esta tarea. Aunque tendremos que ejecutarlo manualmente, también podríamos automatizarlo o utilizar herramientas como &lt;a href="https://prometheus.io/">Prometheus&lt;/a> para monitorizar el rendimiento de la imagen y guardar los datos en un servidor de métricas.&lt;/p>
+&lt;h2 id="post-paso-2-utilizar-herramientas-de-análisis-de-imágenes">Post-paso 2: Utilizar herramientas de análisis de imágenes&lt;/h2>
+&lt;p>Algunas herramientas de análisis de imágenes nos permiten analizar las imágenes Docker y obtener información sobre el tamaño de la imagen, los archivos y los paquetes que contiene.&lt;/p>
+&lt;p>Por ejemplo, la herramienta &lt;a href="https://github.com/wagoodman/dive">Dive&lt;/a>, la cual, dispone recientemente de extensión de docker.&lt;/p>
+&lt;p>Esta extensión nos permite visualizar el tamaño de cada capa de la imagen, así como los archivos y los paquetes que contiene. Esto nos permite identificar archivos y paquetes innecesarios que podemos eliminar de la imagen.&lt;/p>
+&lt;h2 id="bonus-distroless">Bonus: Distroless&lt;/h2>
+&lt;p>Esto me lo guardo para un artículo/vídeo aparte, pero os dejo un enlace a enlace a la documentación de google por si no podéis esperar. &lt;a href="https://github.com/GoogleContainerTools/distroless">Distroless&lt;/a>&lt;/p>
+&lt;p>Dejaré un enlace aquí cuando lo publique.&lt;/p>
+&lt;h2 id="conclusión">Conclusión&lt;/h2>
+&lt;p>Para generar imágenes Docker ligeras, debemos seguir los siguientes pasos:&lt;/p>
+&lt;ul>
+&lt;li>Utilizar una imagen base pequeña, como las versiones slim de debian, las UBI de Red Hat o las imágenes de Alpine.&lt;/li>
+&lt;li>Eliminar archivos no necesarios, como componentes de desarrollo, compiladores, documentación.. etc. Para esto, podemos utilizar herramientas como Dive, tanto desde la línea de comandos como desde docker desktop.&lt;/li>
+&lt;li>Construir una imagen con multi-etapas de construcción.&lt;/li>
+&lt;/ul></description></item><item><title>Blog: PowerToys</title><link>/blog/2023/01/10/powertoys/</link><pubDate>Tue, 10 Jan 2023 00:00:00 +0000</pubDate><guid>/blog/2023/01/10/powertoys/</guid><description>
+&lt;img src="/blog/2023/01/10/powertoys/featured_power_toys_hu4dc4f91103f6c8cf6d771e2ce15a8212_17311_640x0_resize_q75_catmullrom.jpg" width="640" height="370"/>
+&lt;p>PowerToys es un conjunto de herramientas de productividad de Microsoft para Windows 10 y 11. Incluye una variedad de utilidades diseñadas para mejorar la experiencia del usuario al trabajar con el sistema operativo.&lt;/p>
+&lt;figure class="card rounded p-2 td-post-card mb-4 mt-4" style="max-width: 660px">
+&lt;img class="card-img-top" src="/blog/2023/01/10/powertoys/featured_power_toys_hu4dc4f91103f6c8cf6d771e2ce15a8212_17311_700x450_fit_q75_catmullrom.jpg" width="650" height="376">
+&lt;figcaption class="card-body px-0 pt-2 pb-0">
+&lt;p class="card-text">
+Logo de PowerToys
+&lt;/p>
+&lt;/figcaption>
+&lt;/figure>
+&lt;p>Una de las herramientas más populares de PowerToys es FancyZones, que permite a los usuarios crear zonas personalizadas en su escritorio para organizar sus ventanas. Esto es especialmente útil para aquellos que trabajan con varias aplicaciones al mismo tiempo y necesitan una manera de organizarlas de manera eficiente.&lt;/p>
+&lt;p>Otra herramienta popular es PowerRename, que permite a los usuarios renombrar múltiples archivos de manera masiva con una variedad de opciones de búsqueda y reemplazo. Esto es especialmente útil para aquellos que trabajan con grandes cantidades de archivos y necesitan una manera de organizarlos de manera eficiente.&lt;/p>
+&lt;p>PowerToys también incluye una herramienta llamada Shortcut Guide, que muestra una lista de atajos de teclado disponibles en la aplicación en la que se encuentra el usuario en ese momento. Esto es especialmente útil para aquellos que desean aprender nuevos atajos de teclado y aumentar su productividad.&lt;/p>
+&lt;p>En resumen, PowerToys es un conjunto de herramientas de productividad de Microsoft para Windows 10 que incluye una variedad de utilidades diseñadas para mejorar la experiencia del usuario al trabajar con el sistema operativo. Incluye herramientas como FancyZones, PowerRename y Shortcut Guide, que son especialmente útiles para aquellos que trabajan con varias aplicaciones al mismo tiempo y necesitan una manera de organizarlas de manera eficiente, renombrar múltiples archivos de manera masiva y aprender nuevos atajos de teclado.&lt;/p></description></item><item><title>Blog: CKA: Mi experiencia</title><link>/blog/2022/12/21/cka-mi-experiencia/</link><pubDate>Wed, 21 Dec 2022 00:00:00 +0000</pubDate><guid>/blog/2022/12/21/cka-mi-experiencia/</guid><description>
+&lt;img src="/blog/2022/12/21/cka-mi-experiencia/featured_cka_hu8de0008d2bdc14f56a146d4a2bb7d1cd_101031_640x0_resize_catmullrom_3.png" width="640" height="384"/>
+&lt;p>¡Hola! En esta entrada me gustaría contar mi experiencia con la certificación CKA (Certified Kubernetes Administrator) gestionada por la Linux Foundation.&lt;/p>
+&lt;p>Todo este último año he dedicado mis esfuerzos, tanto en lo personal como en lo profesional, a profundizar mis conocimientos en contenedores y orquestación de los mismos. Aunque había trabajado previamente con la tecnología, no había tenido la posibilidad de pelearme con sus tripas ni desplegar mi propia infraestructura.&lt;/p>
+&lt;p>Lo primero es contestar a las preguntas esenciales que personalmente me hice:&lt;/p>
+&lt;ul>
+&lt;li>¿Por qué elegí esta certificación? Personalmente me interesaba más la certificación CKS, la cuál profundiza en kubernetes desde el punto de vista de seguridad, pero sacarse el CKA primero y asentar los conocimientos base me pareció más razonable.&lt;/li>
+&lt;li>¿Cuánto tiempo requiere? Sin conocimientos previos, si estas familiarizado con contenedores, entre tres y seis meses te la puedes sacar sin problemas. Todo depende de tu carga te trabajo, rutina personal.. etc. En mi caso, dedicando unas tres horas semanales terminé el temario del libro en 6 meses y el séptimo mes me embarqué en una maratón para repasar todo el temario y presentarme al examen.&lt;/li>
+&lt;li>¿Cuánto tiempo dispongo para hacerla? La plataforma te deja acceder al curso y examinarte durante un año. Además, también tienes derecho a un examen extra en caso de que suspendas.&lt;/li>
+&lt;li>¿Necesito un super ordenador? No, no es necesario. El examen se puede hacer desde cualquier navegador y no requiere de una gran potencia de procesamiento. Para realizar los ejercicios si que es recomendable un ordenador con al menos 16GB de RAM (32GB recomendable) para las múltiples instancias de kubernetes que se van a crear. También podrías hacerlo en máquinas virtuales en la nube con el coste que ello conlleva.&lt;/li>
+&lt;/ul>
+&lt;h2 id="mi-experiencia">Mi experiencia&lt;/h2>
+&lt;p>Ahora sí, vamos al lío. Mi experiencia con la certificación CKA. Personalmente no se me hizo especialmente dura, aunque es cierto que tenía conocimientos previos de contenedores y el tema no me era completamente desconocido.&lt;/p>
+&lt;p>El temario es bastante completo y es recomendable ir poco más allá de los ejercicios que te plantea el libro para adquirir unos conocimientos más sólidos. No te recomiendo dilatar mucho en el tiempo la certificación, si tienes tiempo, hazlo cuanto antes. Cuando al sexto mes había terminado los ejercicios del libro, había olvidado gran parte de lo aprendido y tuve que repasar todo de nuevo para llegar al examen con soltura.&lt;/p>
+&lt;p>IMPORTANTE. Junto con el libro y el examen, también se te da acceso a dos exámenes de prueba en la plataforma killer.sh que te ayudarán a familiarizarte con el examen y a saber si estás preparado para presentarte al examen final. No te frustres si suspendes, es muy normal. Estos tienen una duración y dificultad bastante mayor respecto al examen final. Lo importante es que, aunque no te de tiempo o falles, tienes acceso durante 24 horas al examen para que lo termines de completar. Además, puedes ver si las respuestas que has dado son correctas o no (algo que en el examen final no puedes hacer) y así entender mejor como se evalúa el examen.&lt;/p>
+&lt;p>De forma complementaria, también puedes hacer ejercicios en la plataforma katacoda, la cual te permite crear instancias de kubernetes y te plantea retos concretos que debes resolver. Es una buena forma de practicar y familiarizarte aún más con los comandos y la sintaxis de kubernetes.&lt;/p>
+&lt;h2 id="el-examen">El examen&lt;/h2>
+&lt;p>El examen son 17 preguntas (si no recuerdo mal), están bien descritas y son bastante claras aun teniendo unos conocimientos básicos de inglés. Hay que obtener al menos 65 puntos para aprobar. Si has hecho los dos exámenes de prueba (aunque hayas tardado 3,4 o 7 horas en completarlos la primera vez) y has practicado con katacoda, no deberías tener problemas en aprobar.&lt;/p>
+&lt;p>Aquí te recomiendo nada más terminar el temario, hacer un examen de prueba de killer.sh, completarlo durante las 24-36 horas que tienes abierta la plataforma sin prisa y asimilando bien todo lo que haces. A partir de ahí, no dejaría pasar más de una semana para hacer el segundo examen de prueba y el final. El segundo examen de prueba va a ser exactamente igual que el primero ( al menos en mi caso) pero te servirá para practicar la velocidad con la que solucionas los ejercicios.&lt;/p>
+&lt;h3 id="algunos-trucos-concretos-para-mejorar-tu-velocidad">Algunos trucos concretos para mejorar tu velocidad&lt;/h3>
+&lt;p>No creo que el examen sea muy complejo, pero si que hay que ir ligero para que luego tengas tiempo de repasar todas las preguntas. Personalmente, ya traía bastante experiencia en vim y tmux por lo que era bastante ágil con el terminal. Por eso es importante que estés familiarizado con los comandos para que no pierdas tiempo en buscarlos. Si prefieres nano o el gestor de pestañas del terminal del linux perfecto, la idea es que estés cómodo y que seas lo más rápido posible en el terminal.&lt;/p>
+&lt;p>Aunque es recomendable llevar la sintaxis fresca es imposible recordar todos los yaml de un objeto de memoria, en estos casos no te preocupes, tienes a tu disposición en el navegador de la máquina del examen acceso a la documentación de kubernetes. La navegación está muy limitada a la web de kubernetes pero es suficiente para encontrar toda la información que necesitas. En mi caso me molesté en documentarme los objetos que más utilizaba en mi web (puedes consultarla en la pestaña de -&amp;gt; Documentación/contenedores/kubernetes) y de cara al examen tuve que practicar utilizando la oficial para ser rápido y tener ubicado todo lo que necesitaba en el examen.&lt;/p>
+&lt;p>Cuando empieces el examen la máquina virtual a la que te dan acceso trae la configuración de un linux por defecto. Aquí es interesante que inviertas un par de minutos en configurar tu entorno de trabajo.&lt;/p>
+&lt;p>Sin duda ganarás mucho tiempo configurando alias de kubernetes. Al menos el &lt;code>k&lt;/code> para abreviar &lt;code>kubectl&lt;/code> y el &lt;code>dro&lt;/code> para &lt;code>--dry-run=client -o yaml&lt;/code> te permitirá crear plantillas de objetos de kubernetes mucho más rápido (y el dry-run te permite ver el resultado sin crear el objeto). Estas configuraciones las puedes hacer en el fichero &lt;code>.bashrc&lt;/code>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>alias k&lt;span style="color:#f92672">=&lt;/span>kubectl
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>alias dro&lt;span style="color:#f92672">=&lt;/span>--dry-run&lt;span style="color:#f92672">=&lt;/span>client -o yaml
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>También puede ser interesante configurar tmux y vim si tienes alguna personalización que aumente tu productividad. Personalmente, con los alias tenía suficiente para ganar tiempo.&lt;/p>
+&lt;h2 id="conclusión">Conclusión&lt;/h2>
+&lt;p>En resumen, la certificación CKA te permite sentirte cómodo administrando un cluster de kubernetes. Si tienes conocimientos previos de contenedores y orquestadores, no debería ser un problema. Si no los tienes, te recomiendo que te familiarices con ellos antes de empezar con la certificación. En cualquier caso, aún con la certificación, te encuentras con muchas situaciones en el día a día que no están cubiertas en el temario y que tendrás que investigar por tu cuenta.&lt;/p>
+&lt;p>Espero que os haya servido de ayuda. Si tenéis cualquier duda, podéis preguntarme por cualquiera de mis redes sociales. ¡Un saludo!&lt;/p></description></item><item><title>Blog: Crea y comparte backups en docker</title><link>/blog/2022/12/01/crea-y-comparte-backups-en-docker/</link><pubDate>Thu, 01 Dec 2022 00:00:00 +0000</pubDate><guid>/blog/2022/12/01/crea-y-comparte-backups-en-docker/</guid><description>
+&lt;img src="/blog/2022/12/01/crea-y-comparte-backups-en-docker/featured_docker_backups.png_hu6ab1f8e148231cfb753b2057a5220ad7_43192_640x0_resize_q75_h2_catmullrom_2.webp" width="640" height="380"/>
+&lt;p>En docker, podemos utilizar volúmenes para persistir datos incluso cuando los contenedores se destruyen. Estos volúmenes eran complejos de administrar en muchas circunstancias, por lo que docker ha creado una nueva funcionalidad para docker desktop, que nos permite crear backups de los volúmenes y compartirlos con otros usuarios de una forma sencilla.&lt;/p>
+&lt;p>&lt;img src="https://www.docker.com/wp-content/uploads/2022/09/share-volume-docker.png.webp" alt="Docker backups">&lt;/p>
+&lt;h2 id="cómo-funciona">¿Cómo funciona?&lt;/h2>
+&lt;p>Docker desktop empezó a ofrecer extensiones hace unos meses. Estas extensiones nos permiten añadir funcionalidades a docker desktop, como por ejemplo, gestión visual de logs, uso de disco, herramientas de desarrollo, seguridad, etc.&lt;/p>
+&lt;p>&lt;a href="https://www.youtube.com/watch?v=6je3tV-_7I0">Tengo un vídeo en youtube hablando de las extensiones de docker desktop&lt;/a>, si quieres saber más sobre ellas.&lt;/p>
+&lt;p>En este caso, la extensión que nos interesa es la de &lt;strong>Docker Backup&lt;/strong>. Esta extensión nos permite crear backups de los volúmenes de docker y compartirlos con otros usuarios de diferentes formas. Dentro vídeo:&lt;/p>
+&lt;div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+&lt;iframe src="https://www.youtube.com/embed/thqgLGMfsGw" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video">&lt;/iframe>
+&lt;/div>
+&lt;h2 id="comandos-utilizados">Comandos utilizados&lt;/h2>
+&lt;p>Crear el contenedor de postgresql para las pruebas:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>docker run --hostname&lt;span style="color:#f92672">=&lt;/span>cb8f628fbe6d --mac-address&lt;span style="color:#f92672">=&lt;/span>02:42:ac:11:00:02 --env&lt;span style="color:#f92672">=&lt;/span>POSTGRES_PASSWORD&lt;span style="color:#f92672">=&lt;/span>postgrespw --env&lt;span style="color:#f92672">=&lt;/span>PATH&lt;span style="color:#f92672">=&lt;/span>/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/lib/postgresql/15/bin --env&lt;span style="color:#f92672">=&lt;/span>GOSU_VERSION&lt;span style="color:#f92672">=&lt;/span>1.14 --env&lt;span style="color:#f92672">=&lt;/span>LANG&lt;span style="color:#f92672">=&lt;/span>en_US.utf8 --env&lt;span style="color:#f92672">=&lt;/span>PG_MAJOR&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">15&lt;/span> --env&lt;span style="color:#f92672">=&lt;/span>PG_VERSION&lt;span style="color:#f92672">=&lt;/span>15.1-1.pgdg110+1 --env&lt;span style="color:#f92672">=&lt;/span>PGDATA&lt;span style="color:#f92672">=&lt;/span>/var/lib/postgresql/data --volume&lt;span style="color:#f92672">=&lt;/span>/var/lib/postgresql/data -p &lt;span style="color:#ae81ff">5432&lt;/span> --label&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#39;com.docker/featured-image=postgres:latest&amp;#39;&lt;/span> --runtime&lt;span style="color:#f92672">=&lt;/span>runc -d postgres:latest
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Blog: Pentesting desde un contenedor</title><link>/blog/2022/08/29/pentesting-desde-un-contenedor/</link><pubDate>Mon, 29 Aug 2022 00:00:00 +0000</pubDate><guid>/blog/2022/08/29/pentesting-desde-un-contenedor/</guid><description>
+&lt;img src="/blog/2022/08/29/pentesting-desde-un-contenedor/featured_pentesting_desde_un_contenedor_huf29348e0c4940b2367c48c76f9480cdb_792607_640x0_resize_catmullrom_3.png" width="640" height="360"/>
+&lt;p>He hablado mucho de como hacer diversas acciones en docker y contenedores. Tampoco quiero que mi contenido sea monotemático pero
+me han lanzando una sugerencia de vídeo y no me puedo resistir a abordar el tema.&lt;/p>
+&lt;p>Concretamente, el usuario pwnhun73r me sugirió utilizar contenedores para pentesting en laboratorios como HackTheBox o TryHackMe. Gracias por el apoyo y la sugerencia. Tu también puedes sugerir nuevo contenido desde &lt;a href="https://github.com/pabpereza/pabpereza/issues">la sección de issues de esta página en GitHub&lt;/a>.&lt;/p>
+&lt;p>Hace tiempo que no me dedico al pentesting profesionalmente pero tampoco me gusta que se me oxide el tema. Youtube es muy restrictivo con el contenido del hacking por lo que, para este vídeo, me limitaré a plantear el entorno sin entrar en la explotación.&lt;/p>
+&lt;h2 id="por-qué">¿Por qué?&lt;/h2>
+&lt;p>Esta es la pregunta del millón&amp;hellip; ¿Por qué?¿Cuál es la necesidad?. Realmente las máquinas virtuales para esta labor igual son más prácticas que un contenedor, tienes tus copias de seguridad, tu interfaz, puedes conectarles hardware cómodamente (antenas, cables, etc) y puedes configurar los servicios que necesites.&lt;/p>
+&lt;p>Para los fanáticos de los contenedores como yo, es por amor de llevar la tecnología al límite. Hay que reconocer que los contenedores tienen sus ventajas. Fáciles de ejecutar, versionar y almacenar. Suficiente para justificar este vídeo.&lt;/p>
+&lt;h2 id="retos">Retos&lt;/h2>
+&lt;p>Tenemos dos retos a tener en cuenta basados en dos escenarios:&lt;/p>
+&lt;h3 id="contenedor-para-pentesting-de-un-sitio-web-público">Contenedor para pentesting de un sitio web público&lt;/h3>
+&lt;p>
+&lt;div class="alert alert-warning" role="alert">
+&lt;h4 class="alert-heading">Warning&lt;/h4>
+Antes de nada recordad que el sitio deberá ser de vuestra propiedad o deberéis tener permiso para auditarlo.
+&lt;/div>
+En este supuesto, accedemos a algún sitio público y queremos hacer pentesting. Para la parte de la enumeración no tendremos limitación alguna. El problema surge cuando queremos explotar un sitio. La mayoría de conexiones que intentaremos generar serán inversas y, por tanto, necesitaremos abrir puertos en el router.&lt;/p>
+&lt;figure class="card rounded p-2 td-post-card mb-4 mt-4" style="max-width: 333px">
+&lt;img class="card-img-top" src="/blog/2022/08/29/pentesting-desde-un-contenedor/web_container.drawio_huac816293542598ce85666786b3ed362d_17866_700x450_fit_catmullrom_3.png" width="323" height="450">
+&lt;figcaption class="card-body px-0 pt-2 pb-0">
+&lt;p class="card-text">
+Conexiones desde un contenedor a un servidor público
+&lt;/p>
+&lt;/figcaption>
+&lt;/figure>
+&lt;p>Supongamos que hacemos las pruebas desde un servidor público también, como un VPS. En este caso, no tendremos problema para abrir puertos. Aunque no todo queda ahí, tendremos que natear al contenedor un rango de puertos para que el servidor pueda acceder a los servicios que estemos ejecutando en el contenedor.&lt;/p>
+&lt;p>Imaginaros que estamos escuchando una conexión con netcat en el puerto 4444. Deberíamos ejecutar el contenedor con ese puerto mapeado del host para que podamos capturar las conexiones desde del contenedor.&lt;/p>
+&lt;p>Esto podemos hacerlo así:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>docker run -it -p 4444:4444 kalilinux/kali-rolling /bin/bash
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="contenedor-para-pentesting-en-un-laboratorio-privado">Contenedor para pentesting en un laboratorio privado&lt;/h3>
+&lt;p>En este caso, la parte de acceso y enrutamiento es más sencillo dado que normalmente a los laboratorios de pentesting nos conectamos a través de una VPN, la cuál, nos crea un tunel directamente desde el contenedor al laboratorio.
+&lt;figure class="card rounded p-2 td-post-card mb-4 mt-4" style="max-width: 288px">
+&lt;img class="card-img-top" src="/blog/2022/08/29/pentesting-desde-un-contenedor/lab_container.drawio_huec361dd4430ba791d15e41eba0cc9af1_27417_700x450_fit_catmullrom_3.png" width="278" height="450">
+&lt;figcaption class="card-body px-0 pt-2 pb-0">
+&lt;p class="card-text">
+Conexiones desde un contenedor a un laboratorio privado
+&lt;/p>
+&lt;/figcaption>
+&lt;/figure>
+&lt;/p>
+&lt;p>La problemática viene por la parte del cliente VPN en los contenedores.&lt;/p>
+&lt;h4 id="limitaciones">Limitaciones&lt;/h4>
+&lt;p>La principal limitación es la acceso a las interfaces de red. En una máquina virtual virtualizas tanto software como hardware. En el caso de los contenedores, al ser procesos aislados, tenemos que lidiar con la problemática de crear interfaces de red para las VPN de algunos laboratorio.&lt;/p>
+&lt;p>Podemos levantar un contenedor con Kali Linux solventando estas limitaciones, usando el parámetro &lt;code>--privileged&lt;/code> para que el contenedor tenga acceso a las interfaces de red del host y &lt;code>--sysctl net.ipv6.conf.all.disable_ipv6=0&lt;/code> para que el contenedor tenga acceso a la red IPv6.&lt;/p>
+&lt;p>El comando completo sería:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>docker run -it --privileged --sysctl net.ipv6.conf.all.disable_ipv6&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">0&lt;/span> kalilinux/kali-rolling /bin/bash
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Así ya podríamos conectarnos a HackTheBox, por ejemplo.&lt;/p>
+&lt;h2 id="vídeo">Vídeo&lt;/h2>
+&lt;p>Sin más preámbulos, dentro vídeo:
+&lt;div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+&lt;iframe src="https://www.youtube.com/embed/0GsiBPVRMyI" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video">&lt;/iframe>
+&lt;/div>
+&lt;/p></description></item><item><title>Blog: Potencia powershell</title><link>/blog/2022/08/08/potencia-powershell/</link><pubDate>Mon, 08 Aug 2022 00:00:00 +0000</pubDate><guid>/blog/2022/08/08/potencia-powershell/</guid><description>
+&lt;img src="/blog/2022/08/08/potencia-powershell/featured_oh_my_posh_logo_hu6b3dddba5d5f1cd2cb252d327f3307cf_20861_640x0_resize_catmullrom_3.png" width="640" height="416"/>
+&lt;p>He de reconocer que no soy
+muy fan de powershell, es más,
+en ciertos momentos de mi vida
+he llegado a detestarlo.
+Tanto si te encanta powershell
+como si te ves forzado a usarlo, hay que reconocer quees muy mejorable.&lt;/p>
+&lt;p>En el anterior vídeo vimos el proceso de potenciar el terminal en entornos unix y linux mediante
+zsh y oh-my-zsh. &lt;a href="/blog/potencia_tu_terminal/">Aquí la entrada al blog y enlace al vídeo&lt;/a>&lt;/p>
+&lt;p>Para esta ocasión, abordaremos
+el tema en sistemas windows
+utilizando oh my posh.
+OMP nos ofrece características,
+que a día de hoy considero
+indispensables, como:&lt;/p>
+&lt;ul>
+&lt;li>Auto completado&lt;/li>
+&lt;li>Navegación simplificada&lt;/li>
+&lt;li>Información avanzada&lt;/li>
+&lt;li>Personalizacion con múltiples temas&lt;/li>
+&lt;/ul>
+&lt;p>Dentro vídeo:
+&lt;div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+&lt;iframe src="https://www.youtube.com/embed/kWIesAUhLAg" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video">&lt;/iframe>
+&lt;/div>
+&lt;/p>
+&lt;h3 id="todos-los-comandos-del-vídeo-y-enlaces-están-en-la-siguiente-página">Todos los comandos del vídeo y enlaces están en la siguiente página:&lt;/h3>
+&lt;p>&lt;strong>Documentación: &lt;a href="/docs/windows/oh_my_posh/">/docs/windows/oh_my_posh/&lt;/a>&lt;/strong>&lt;/p></description></item><item><title>Blog: Escalar privilegios en docker</title><link>/blog/2022/03/29/escalar-privilegios-en-docker/</link><pubDate>Tue, 29 Mar 2022 00:00:00 +0000</pubDate><guid>/blog/2022/03/29/escalar-privilegios-en-docker/</guid><description>
+&lt;img src="/blog/2022/03/29/escalar-privilegios-en-docker/featured_docker_escape_hud957b946964690c742c05920f2d6695c_322450_640x0_resize_catmullrom_3.png" width="640" height="360"/>
+&lt;p>Los contenedores son procesos aislados que, por defecto, ¿se podrían considerar como seguros?. Su enfoque nos dice que sí pero existen muchos casos en los que, principalmente por malas configuraciones, podrían ser vulnerables.&lt;/p>
+&lt;h2 id="aislados-pero-no-herméticos">Aislados pero no herméticos&lt;/h2>
+&lt;p>Tecnologías de contenedores como Docker, LXC, LXD, etc.. permiten a los usuarios lanzar un proceso aislado pero, existen multiples funcionalidades, que podrían comprometer la aplicación en mayor o menor medida.&lt;/p>
+&lt;p>&lt;strong>Documentación: &lt;a href="/docs/pentesting/privilegios/contenedores">/docs/pentesting/privilegios/contenedores&lt;/a>&lt;/strong>&lt;/p>
+&lt;p>En este vídeo trato las principales malas configuraciones que permiten a un atacante escapar de un contenedor:&lt;/p>
+&lt;div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+&lt;iframe src="https://www.youtube.com/embed/XmOsJXA0FU8" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video">&lt;/iframe>
+&lt;/div>
+&lt;p>Principales malas configuraciones:&lt;/p>
+&lt;ul>
+&lt;li>Montaje de volúmenes&lt;/li>
+&lt;li>Ejecución en modo privilegiado&lt;/li>
+&lt;li>Escalado a través del grupo de docker&lt;/li>
+&lt;li>Host vulnerable&lt;/li>
+&lt;li>Secretos o variables de entorno&lt;/li>
+&lt;li>Montaje del socket&lt;/li>
+&lt;li>Segregación de redes&lt;/li>
+&lt;/ul></description></item><item><title>Blog: Raspberry Pi Touchscreen 7</title><link>/blog/2022/02/27/raspberry-pi-touchscreen-7/</link><pubDate>Sun, 27 Feb 2022 00:00:00 +0000</pubDate><guid>/blog/2022/02/27/raspberry-pi-touchscreen-7/</guid><description>
+&lt;img src="/blog/2022/02/27/raspberry-pi-touchscreen-7/featured_raspberry_touchscreen.png_hu6867f1c1ac5b0eb5e88cae6cdcee8737_171741_640x0_resize_catmullrom_3.png" width="640" height="373"/>
+&lt;p>Las raspberry pi son de las computadoras más versátiles y asequibles que puedes encontrar en el mercado. Además, dada su popularidad, tienen una gran cantidad de software específico (pihole, piretro&amp;hellip; etc) que ayudará a darle un sinfín de usos y, por otra parte, tiene muchos accesorios que la potenciarán aún más si cabe.&lt;/p>
+&lt;p>Concretamente me refiero a la pantalla táctil de 7 pulgadas que se puede montar en cualquier raspberry pi. Esta se puede utilizar para crear un consola portátil, control industrial, etc.&lt;/p>
+&lt;figure class="card rounded p-2 td-post-card mb-4 mt-4" style="max-width: 664px">
+&lt;img class="card-img-top" src="/blog/2022/02/27/raspberry-pi-touchscreen-7/featured_raspberry_touchscreen.png_hu6867f1c1ac5b0eb5e88cae6cdcee8737_171741_700x450_fit_catmullrom_3.png" width="654" height="381">
+&lt;figcaption class="card-body px-0 pt-2 pb-0">
+&lt;p class="card-text">
+Raspberry touchscreen 7 pulgadas
+&lt;/p>
+&lt;/figcaption>
+&lt;/figure>
+&lt;h3 id="instalación-y-configuración">Instalación y configuración&lt;/h3>
+&lt;p>En este vídeo he detallado el proceso de instalación y configuración de la pantalla táctil.&lt;/p>
+&lt;div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+&lt;iframe src="https://www.youtube.com/embed/eGZvo7AnO_U" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video">&lt;/iframe>
+&lt;/div>
+&lt;h3 id="pero-y-la-carcasa">Pero, ¿y la carcasa?&lt;/h3>
+&lt;p>En la pantalla oficial no viene incluida una carcasa que proteja la parte trasera de la pantalla y la raspberry. Podemos comprarlas por precios entre 10-20€, aunque, si eres maker o tienes una impresora 3D, en la web de &lt;a href="https://www.thingiverse.com/search?q=raspberry+touchscreen+7&amp;amp;type=things&amp;amp;sort=relevant">thingiverse&lt;/a> podrás encontrar una gran variedad de modelos para hacértela tu mismo.&lt;/p></description></item><item><title>Blog: Potencia tu terminal</title><link>/blog/2021/12/30/potencia-tu-terminal/</link><pubDate>Thu, 30 Dec 2021 00:00:00 +0000</pubDate><guid>/blog/2021/12/30/potencia-tu-terminal/</guid><description>
+&lt;img src="/blog/2021/12/30/potencia-tu-terminal/featured_zsh_logo_hue23e4fd3a72d80386f9064587a1a8174_29421_640x0_resize_q75_catmullrom.jpg" width="640" height="395"/>
+&lt;p>Hola y bienvenidos a un nuevo vídeo en el que hablaremos de zsh y un framework llamado oh-my-zsh. Estos te permitirán personalizar el terminal para adaptarlo a tus gustos y necesidades. Espero que después de este vídeo termines amándolo y usándolo más a menudo.&lt;/p>
+&lt;p>Dentro vídeo:
+&lt;div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+&lt;iframe src="https://www.youtube.com/embed/cyK89jHB9JA" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video">&lt;/iframe>
+&lt;/div>
+&lt;/p>
+&lt;h3 id="todos-los-comandos-del-vídeo-y-enlaces-estan-en-la-siguiente-página">Todos los comandos del vídeo y enlaces estan en la siguiente página:&lt;/h3>
+&lt;p>&lt;strong>Documentación: &lt;a href="/docs/linux/zsh/">/docs/linux/zsh/&lt;/a>&lt;/strong>&lt;/p></description></item><item><title>Blog: Errores comunes en Git</title><link>/blog/2021/12/12/errores-comunes-en-git/</link><pubDate>Sun, 12 Dec 2021 00:00:00 +0000</pubDate><guid>/blog/2021/12/12/errores-comunes-en-git/</guid><description>
+&lt;img src="/blog/2021/12/12/errores-comunes-en-git/featured_git_hucca589efda708c57ef846517ae61dd64_57522_640x0_resize_catmullrom_3.png" width="640" height="273"/>
+&lt;p>Hola y bienvenidos a una nueva entrada del blog. En este artículo se explicarán los errores más comunes en git y como solucionarlos.&lt;/p>
+&lt;figure class="card rounded p-2 td-post-card mb-4 mt-4" style="max-width: 710px">
+&lt;img class="card-img-top" src="/blog/2021/12/12/errores-comunes-en-git/featured_git_hucca589efda708c57ef846517ae61dd64_57522_700x450_fit_catmullrom_3.png" width="700" height="299">
+&lt;figcaption class="card-body px-0 pt-2 pb-0">
+&lt;p class="card-text">
+Logo de git
+&lt;/p>
+&lt;/figcaption>
+&lt;/figure>
+&lt;p>Git es un sistma metódico de control de versiones, que permite almacenar una serie de cambios en un repositorio de código fuente. Durante los
+procesos de desarrollo es muy habitual que se cometan ciertos errores al trabajar con git. No pasa nada, es normal y más cuando se esta aprendiendo.&lt;/p>
+&lt;p>En este vídeo comento los que considero más comunes pero no dudes en contribuir si se te ocurre algún error que no se haya explicado.
+Todos los comandos los puedes encontrar en la &lt;a href="/docs/programacion/git/solucionar_errores">documentación&lt;/a> por escrito. Para todo lo demás, dentro vídeo:&lt;/p>
+&lt;div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+&lt;iframe src="https://www.youtube.com/embed/9sK_is8ufbk" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video">&lt;/iframe>
+&lt;/div></description></item><item><title>Blog: Linux en Windows - Windows Subsystem Linux</title><link>/blog/2021/11/10/linux-en-windows-windows-subsystem-linux/</link><pubDate>Wed, 10 Nov 2021 00:00:00 +0000</pubDate><guid>/blog/2021/11/10/linux-en-windows-windows-subsystem-linux/</guid><description>
+&lt;img src="/blog/2021/11/10/linux-en-windows-windows-subsystem-linux/featured_wsl2_hu31559d143682db35231a729ecc648ec9_9378_640x0_resize_catmullrom_3.png" width="640" height="440"/>
+&lt;p>El subsistema de linux en windows se introdujo hace unos años en windows 10 pero sus primeras versiones tenían ciertas limitaciones y no acababa de funcionar como se esperaba. Personalmente, con WSL2 y Windows 11 creo que ha llegado a ofrecer el funcionamiento que realmente se esperaba de el. Dentro vídeo:
+&lt;div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+&lt;iframe src="https://www.youtube.com/embed/p04dRcQh2VM" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video">&lt;/iframe>
+&lt;/div>
+&lt;/p>
+&lt;h2 id="ventajas-y-desventajas">Ventajas y desventajas&lt;/h2>
+&lt;p>En el vídeo analizo las principales ventajas que ofrece y alguna que otra desventaja por el camino. Los principales puntos a destacar son:&lt;/p>
+&lt;ul>
+&lt;li>El consumo de memoria es inferior al de una máquina virtual. Aunque mayor que una solución nativa, windows virtualiza un kernel linux que aprovechan y comparten las distintas distribuciones del subsistema.&lt;/li>
+&lt;li>También sirve backend para aplicaciones como Docker Desktop o Rancher Desktop haciendolos más livianos que usándolos sober hyper-V.&lt;/li>
+&lt;li>La integración con windows terminal es sencilla. Además, este nuevo terminal nos ofrece una interfaz limpia, personalizable y con una multitarea que ya le hacía falta. Nose vosotros pero a mi me encanta.&lt;/li>
+&lt;li>Simplicidad en el uso de varios entornos, instalación, reseteo o borrado.&lt;/li>
+&lt;li>La integración con VS Code de forma bidireccional es algo que me encanta. Ya no me molesto en instalar los lenguajes de programación o las herramientas de sistemas en windows, prácticamente todo lo uso sobre una distribución u otra en función de lo que necesite.&lt;/li>
+&lt;li>Montaje del sistema de archivos. Aunque el acceso es más lento al ser dos sistemas de archivos diferentes, windows nos monta nuestro home (c:/users/pablo) en cada uno de los subsistemas.&lt;/li>
+&lt;li>Integración de los sistemas de archivos de las distribuciones en el explorador de windows.&lt;/li>
+&lt;/ul>
+&lt;figure class="card rounded p-2 td-post-card mb-4 mt-4" style="max-width: 710px">
+&lt;img class="card-img-top" src="/blog/2021/11/10/linux-en-windows-windows-subsystem-linux/wslpic_hu201e03dafeb7857c89c14db5798d694d_45791_700x450_fit_catmullrom_3.png" width="700" height="360">
+&lt;figcaption class="card-body px-0 pt-2 pb-0">
+&lt;p class="card-text">
+Integración de los sistemas de archivos de las distribuciones en el explorador de windows.
+&lt;/p>
+&lt;/figcaption>
+&lt;/figure>
+&lt;p>Espero que os guste y os anime a sacarle más partido a las herramientas que nos ofrece windows. ¡Hasta el próximo!&lt;/p></description></item><item><title>Blog: Kali en Docker recopilación</title><link>/blog/2021/11/01/kali-en-docker-recopilaci%C3%B3n/</link><pubDate>Mon, 01 Nov 2021 00:00:00 +0000</pubDate><guid>/blog/2021/11/01/kali-en-docker-recopilaci%C3%B3n/</guid><description>
+&lt;img src="/blog/2021/11/01/kali-en-docker-recopilaci%C3%B3n/featured_kali_en_docker_hua84c0b00509a932ac755fccfda475c2b_509673_640x0_resize_catmullrom_3.png" width="640" height="307"/>
+&lt;p>Unas semanas antes de la creación de esta web había hecho una trilogía de vídeos hablando de como utilizar el sistema operativo Kalilinux en Docker. Por dejarlos aquí archivados de alguna manera y dejar la documentación por escrito he optado por escribir esta entrada.&lt;/p>
+&lt;h1 id="ventajas-y-desventajas-de-utilizar-kalilinux-en-docker">Ventajas y desventajas de utilizar Kalilinux en Docker&lt;/h1>
+&lt;p>Bueno, yo creo que si conoces la tecnología docker la respuesta es simple. Puedes tener imágenes ligeras, con las herramientas que necesitas, preparadas para ejecutar muy rápidamente. Tambien puedes gestionarlas con un repositorio remoto y transportarlas fácilmente entre distintos entornos.&lt;/p>
+&lt;p>Pero como todo, tiene sus grandes inconvenientes. Las imágenes de docker no tienen acceso directo al hardware y eso puede lastrar un poco el rendimiento, concretamente si necesitamos la tarjeta gráfica en operaciones de computación como el cracking de contraseñas.&lt;/p>
+&lt;p>En la &lt;a href="https://www.kali.org/get-kali/">propia página&lt;/a> de Kali se puede ver la comparativa completa con todas sus opciones:&lt;/p>
+&lt;figure class="card rounded p-2 td-post-card mb-4 mt-4" style="max-width: 710px">
+&lt;img class="card-img-top" src="/blog/2021/11/01/kali-en-docker-recopilaci%C3%B3n/featured_kali_en_docker_hua84c0b00509a932ac755fccfda475c2b_509673_700x450_fit_catmullrom_3.png" width="700" height="336">
+&lt;figcaption class="card-body px-0 pt-2 pb-0">
+&lt;p class="card-text">
+Comparativa de las distintas opciones de Kalilinux.
+&lt;/p>
+&lt;/figcaption>
+&lt;/figure>
+&lt;h1 id="vídeos-explicativos">Vídeos explicativos&lt;/h1>
+&lt;div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+&lt;iframe src="https://www.youtube.com/embed/yvfXt7Ndrvc" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video">&lt;/iframe>
+&lt;/div>
+&lt;div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+&lt;iframe src="https://www.youtube.com/embed/qnsi1cnTK3A" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video">&lt;/iframe>
+&lt;/div>
+&lt;div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+&lt;iframe src="https://www.youtube.com/embed/sVJ4iocUods" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video">&lt;/iframe>
+&lt;/div></description></item><item><title>Blog: La alternativa a Docker que estabas buscando - Rancher Desktop</title><link>/blog/2021/10/24/la-alternativa-a-docker-que-estabas-buscando-rancher-desktop/</link><pubDate>Sun, 24 Oct 2021 00:00:00 +0000</pubDate><guid>/blog/2021/10/24/la-alternativa-a-docker-que-estabas-buscando-rancher-desktop/</guid><description>
+&lt;img src="/blog/2021/10/24/la-alternativa-a-docker-que-estabas-buscando-rancher-desktop/featured_rancher_desktop_logo_huc6dff30d0dc0d3ffd50779e46f7b2449_4921_640x0_resize_q75_catmullrom.jpeg" width="640" height="363"/>
+&lt;p>Ya estuve explicando en este &lt;a href="/blog/2021/09/12/docker-desktop-de-pago">artículo&lt;/a> los nuevos planes de Docker Desktop y como afectaría a los usuarios.
+Aunque existen otras alternativas como Buildah o Podman, estas, solo funcionan sobre linux y si sois usuarios de
+Windows o Mac y pensais en montar una máquina Linux quizá prefiráis usar docker engine por la familiaridad que no usar otras herramientas.&lt;/p>
+&lt;p>Rancher Desktop se posiciona como una alternativa a tener en cuenta. Dentro vídeo &lt;i class='fa fa-film'>&lt;/i>
+&lt;div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+&lt;iframe src="https://www.youtube.com/embed/LmKN4NvpR-4" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video">&lt;/iframe>
+&lt;/div>
+&lt;/p>
+&lt;h2 id="qué-es-rancher-desktop">¿Qué es rancher desktop?&lt;/h2>
+&lt;p>Si vienes del mundo de kubernetes seguro que Rancher te es familiar. Este es una plataforma de kubernetes con una capa de gestión
+pensado en la facilidad de despliegue y gestión de clústers.&lt;/p>
+&lt;p>En esta ocasión, rancher desktop es una forma de acercarse a los desarrolladores y competir directamente con docker en el escritorio.&lt;/p>
+&lt;h2 id="qué-aporta">¿Qué aporta?&lt;/h2>
+&lt;p>El planteamiento es similar al de Docker Desktop, gestiona automáticamente la instalación de una interfaz de usario, el engine de contenedores (containerd), k3s (la misma tecnología que utiliza rancher para kubernetes), kubectl&amp;hellip; etc y todo este paquete en una instalación sencilla.&lt;/p>
+&lt;figure class="card rounded p-2 td-post-card mb-4 mt-4" style="max-width: 588px">
+&lt;img class="card-img-top" src="/blog/2021/10/24/la-alternativa-a-docker-que-estabas-buscando-rancher-desktop/rancher_desktop_panel_hu06da50055044c71d4a54d06a2d3b2a8d_588237_700x450_fit_catmullrom_3.png" width="578" height="450">
+&lt;figcaption class="card-body px-0 pt-2 pb-0">
+&lt;p class="card-text">
+Panel de control de rancher desktop en Mac
+&lt;/p>
+&lt;/figcaption>
+&lt;/figure>
+&lt;p>Si has visto el vídeo Rancher Desktop, al menos en Windows, tiene algunos pequeños errores. Cabe recordar que su estado de desarrollo es pre-release y es normal que durante sus betas encontremos
+errores que nos impidan utilizarlo a día de hoy.&lt;/p>
+&lt;h2 id="la-alternativa-definitiva">La alternativa definitiva&lt;/h2>
+&lt;p>Como ya comentaba, una solución 100% efectiva es instalar docker en una máquina virtual de linux. Esto lo podríamos hacer manualmente pero, puestos a hacerlo, mejor hacerlo bien.&lt;/p>
+&lt;p>Un viejo compañero con alias &lt;a href="https://github.com/Yohnah">Yohnah&lt;/a> en Github ha creado un repositorio con automatismos y una máquina virtual preparada para desplegar automáticamente con Vagrant.
+La máquina virtual viene con docker instalado y listo para funcionar, además, el automatismo deja el host configurado para que utilice el docker engine de la máquina virtual de una forma similar a la que lo hace docker desktop. Toda la guía aquí:
+&lt;a href="https://github.com/Yohnah/Docker">https://github.com/Yohnah/Docker&lt;/a>&lt;/p>
+&lt;p>¡Hasta el siguiente!&lt;/p></description></item><item><title>Blog: Analizar la seguridad de las imágenes de Docker</title><link>/blog/2021/09/19/analizar-la-seguridad-de-las-im%C3%A1genes-de-docker/</link><pubDate>Sun, 19 Sep 2021 00:00:00 +0000</pubDate><guid>/blog/2021/09/19/analizar-la-seguridad-de-las-im%C3%A1genes-de-docker/</guid><description>
+&lt;img src="/blog/2021/09/19/analizar-la-seguridad-de-las-im%C3%A1genes-de-docker/featured_docker_escaner_vulnerabilidades_hu0e8237203507294e5d179ebaebf784e1_777481_640x0_resize_q75_catmullrom.jpg" width="640" height="360"/>
+&lt;p>En anteriores vídeos he hablado acerca de la seguridad a la hora de crear imágenes pero hay un aspecto más crítico y fundamental que se suele obviar al construir imágenes. Estas, contienen software en forma de librerías del sistema que también pueden ser vulnerables. Pero, ¿como podemos revisar esa seguridad?&lt;/p>
+&lt;div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+&lt;iframe src="https://www.youtube.com/embed/XmGEMOgI9-g" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video">&lt;/iframe>
+&lt;/div>
+&lt;h2 id="qué-riesgos-de-seguridad-hay-en-las-imágenes-de-docker">¿Qué riesgos de seguridad hay en las imágenes de Docker?&lt;/h2>
+&lt;p>Cuando construimos imágenes de Docker siempre partimos de una imagen base, que es la que se usa para construir las imágenes que queremos. Esta imagen base puede ser una imagen de una distribución Linux, o de una imagen de una aplicación. Estas imágenes pueden contener código de una aplicación, librerías, paquetes, etc. Todo el código que se encuentre en estas imágenes puede ser vulnerable a ataques de seguridad.&lt;/p>
+&lt;h2 id="que-herramientas-podemos-usar-para-analizar-la-seguridad-de-las-imágenes-de-docker">¿Que herramientas podemos usar para analizar la seguridad de las imágenes de Docker?&lt;/h2>
+&lt;p>Existen multitud de herramientas que pueden ser útiles para analizar la seguridad de las imágenes de Docker. Las más destacadas son:&lt;/p>
+&lt;ul>
+&lt;li>Trivy&lt;/li>
+&lt;li>Anchore&lt;/li>
+&lt;li>Clair&lt;/li>
+&lt;/ul>
+&lt;p>Para este vídeo y evitar instalar nada, hemos utilizado el escáner que viene incorporado con Docker en las últimas versiones. Se puede ejecutar con el siguiente comando:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>docker scan &amp;lt;nombre de la imagen&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Iré documentando el uso de diferentes herramientas de análisis de seguridad en la siguiente pagína de la documentación:
+&lt;a href="/docs/contenedores/analizar_contenedores/">Escaneo de seguridad en contenedores&lt;/a>&lt;/p></description></item><item><title>Blog: ¿Docker desktop de pago?</title><link>/blog/2021/09/12/docker-desktop-de-pago/</link><pubDate>Sun, 12 Sep 2021 00:00:00 +0000</pubDate><guid>/blog/2021/09/12/docker-desktop-de-pago/</guid><description>
+&lt;img src="/blog/2021/09/12/docker-desktop-de-pago/featured_docker_desktop_planes_hu11fea927c14a98521cf9e3076a898257_134646_640x0_resize_catmullrom_3.png" width="640" height="304"/>
+&lt;p>La empresa Docker anunció la semana pasada los cambios en su modelo de negocio empresarial y &lt;strong>sus nuevos planes de subscripción para empresas&lt;/strong>.&lt;/p>
+&lt;p>Hasta el momento, la empresa ha sabido posicionarse como una de las más importantes en el mundo de la tecnología pero sin generar ningún tipo de ingreso.&lt;/p>
+&lt;p>Las nuevas versiones tendrán ciertas restricciones que forzarán a algunas empresas a utilizar las modalidades de pago.&lt;/p>
+&lt;figure class="card rounded p-2 td-post-card mb-4 mt-4" style="max-width: 710px">
+&lt;img class="card-img-top" src="/blog/2021/09/12/docker-desktop-de-pago/featured_docker_desktop_planes_hu11fea927c14a98521cf9e3076a898257_134646_700x450_fit_catmullrom_3.png" width="700" height="333">
+&lt;figcaption class="card-body px-0 pt-2 pb-0">
+&lt;p class="card-text">
+Planes de precios de Docker
+&lt;/p>
+&lt;/figcaption>
+&lt;/figure>
+&lt;p>Con el precio, todo hay que decirlo, ganamos muchas funcionalidades como SSO, escaneos de seguridad, builds en la nube, colaboración entre equipos&amp;hellip; etc. Podéis ver una lista completa de las funcionalidades en la &lt;a href="https://www.docker.com/pricing">página de Docker&lt;/a>.&lt;/p>
+&lt;h3 id="quién-tiene-que-pagar">¿Quién tiene que pagar?&lt;/h3>
+&lt;p>Las empresas que tengan &lt;strong>más de 250 empleados o unos ingresos anuales de 10 millones de dólares&lt;/strong> deberán utilizar los planes profesionales, de equipos o de empresa. Para dar margen a medianas y grandes empresas, las principales afectadas, se dará un periodo de gracia hasta el 31 de Enero de 2022.&lt;/p>
+&lt;p>Seguirá siendo totalmente gratuito en los siguientes casos:&lt;/p>
+&lt;ul>
+&lt;li>Pequeñas empresas con menos de 250 empleados y menos de 10 millones de dólares de ingresos anuales.&lt;/li>
+&lt;li>Uso personal.&lt;/li>
+&lt;li>Instituciones educativas.&lt;/li>
+&lt;li>Proyectos no comerciales open-source.&lt;/li>
+&lt;/ul>
+&lt;h3 id="qué-alternativas-tengo">¿Qué alternativas tengo?&lt;/h3>
+&lt;p>Estas nuevas políticas solo afecta a la versión de Docker Desktop, es decir, a la versión de Windows y Mac. En linux se utiliza Docker Engine al cuál no se le aplican estas restricciones.&lt;/p>
+&lt;p>Además, docker no es la única forma de construir contenedores. Existen otras tecnologías como &lt;strong>podman&lt;/strong> o &lt;strong>buildah&lt;/strong> que también nos permiten construir imágenes sin requerir un docker engine aunque estas también solo estan disponibles en Linux.&lt;/p></description></item></channel></rss>

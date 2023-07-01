@@ -1,0 +1,12 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Pabpereza - DevSecOps – fingerprinting</title><link>/tags/fingerprinting/</link><description>Recent content in fingerprinting on Pabpereza - DevSecOps</description><generator>Hugo -- gohugo.io</generator><atom:link href="/tags/fingerprinting/index.xml" rel="self" type="application/rss+xml"/><item><title>Docs: SNMP</title><link>/docs/pentesting/reconocimiento/snmp/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/pentesting/reconocimiento/snmp/</guid><description>
+&lt;h2 id="introducción">Introducción&lt;/h2>
+&lt;p>SNMP o Simple Network Mangement Protocol es un protocolo usado para monitorizar los dispositivos de una red ( por ejemplo, routers, switches, impresoras, IoTs&amp;hellip;).
+Las versiones 1,2 y 2c son bastante inseguras y transmiten la información en texto plano. Estos problemas se solucionaron con la versión 3.
+En cualquiera de los casos teniendo credenciales se puede lsitar información muy valiosa de un sistema.&lt;/p>
+&lt;h2 id="enumeración">Enumeración&lt;/h2>
+&lt;p>Nmap tiene varios scripts para enumerar información sobre este protocolo.&lt;/p>
+&lt;p>Lo primero que tendremos que identificar es el protocolo y puerto. Por defecto, opera en el 161 UDP. Con NMAP podríamos lanzar un barrido a todos los puertos UDP con el siguiente comando:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>nmap -v -p- -sU &amp;lt;Objetivo&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Una vez identificado el protocolo y puerto, especificamos a nmap el puesto concreto sobre el que operar:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>nmap -p161 -sU &amp;lt;Objetivo&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Ahora &lt;em>toca&lt;/em> utilizar los scripts de nmap. Podríamos dejarlo en modo automático con el parámetro &lt;strong>-sC&lt;/strong> pero no es el método más eficaz dado que muchos de estos script requieren parámetros.&lt;/p></description></item></channel></rss>

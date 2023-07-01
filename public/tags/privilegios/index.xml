@@ -1,0 +1,20 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Pabpereza - DevSecOps – privilegios</title><link>/tags/privilegios/</link><description>Recent content in privilegios on Pabpereza - DevSecOps</description><generator>Hugo -- gohugo.io</generator><lastBuildDate>Tue, 29 Mar 2022 00:00:00 +0000</lastBuildDate><atom:link href="/tags/privilegios/index.xml" rel="self" type="application/rss+xml"/><item><title>Docs: Escalada privilegios</title><link>/docs/pentesting/privilegios/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/pentesting/privilegios/</guid><description/></item><item><title>Blog: Escalar privilegios en docker</title><link>/blog/2022/03/29/escalar-privilegios-en-docker/</link><pubDate>Tue, 29 Mar 2022 00:00:00 +0000</pubDate><guid>/blog/2022/03/29/escalar-privilegios-en-docker/</guid><description>
+&lt;img src="/blog/2022/03/29/escalar-privilegios-en-docker/featured_docker_escape_hud957b946964690c742c05920f2d6695c_322450_640x0_resize_catmullrom_3.png" width="640" height="360"/>
+&lt;p>Los contenedores son procesos aislados que, por defecto, ¿se podrían considerar como seguros?. Su enfoque nos dice que sí pero existen muchos casos en los que, principalmente por malas configuraciones, podrían ser vulnerables.&lt;/p>
+&lt;h2 id="aislados-pero-no-herméticos">Aislados pero no herméticos&lt;/h2>
+&lt;p>Tecnologías de contenedores como Docker, LXC, LXD, etc.. permiten a los usuarios lanzar un proceso aislado pero, existen multiples funcionalidades, que podrían comprometer la aplicación en mayor o menor medida.&lt;/p>
+&lt;p>&lt;strong>Documentación: &lt;a href="/docs/pentesting/privilegios/contenedores">/docs/pentesting/privilegios/contenedores&lt;/a>&lt;/strong>&lt;/p>
+&lt;p>En este vídeo trato las principales malas configuraciones que permiten a un atacante escapar de un contenedor:&lt;/p>
+&lt;div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+&lt;iframe src="https://www.youtube.com/embed/XmOsJXA0FU8" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video">&lt;/iframe>
+&lt;/div>
+&lt;p>Principales malas configuraciones:&lt;/p>
+&lt;ul>
+&lt;li>Montaje de volúmenes&lt;/li>
+&lt;li>Ejecución en modo privilegiado&lt;/li>
+&lt;li>Escalado a través del grupo de docker&lt;/li>
+&lt;li>Host vulnerable&lt;/li>
+&lt;li>Secretos o variables de entorno&lt;/li>
+&lt;li>Montaje del socket&lt;/li>
+&lt;li>Segregación de redes&lt;/li>
+&lt;/ul></description></item></channel></rss>

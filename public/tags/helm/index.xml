@@ -1,0 +1,54 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Pabpereza - DevSecOps – helm</title><link>/tags/helm/</link><description>Recent content in helm on Pabpereza - DevSecOps</description><generator>Hugo -- gohugo.io</generator><atom:link href="/tags/helm/index.xml" rel="self" type="application/rss+xml"/><item><title>Docs: Helm</title><link>/docs/contenedores/kubernetes/helm/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/contenedores/kubernetes/helm/</guid><description>
+&lt;p>Helm es una herramienta que nos permite gestionar, versionar y desplegar múltiples recursos de kubernetes.&lt;/p>
+&lt;p>Los componentes en helm se estructuran de la siguiente manera:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-md" data-lang="md">&lt;span style="display:flex;">&lt;span>├── Chart.yaml
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>├── README.md
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>├── templates
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>│ ├── NOTES.txt
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>│ ├── _helpers.tpl
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>│ ├── configmap.yaml
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>│ ├── deployment.yaml
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>│ ├── pvc.yaml
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>│ ├── secrets.yaml
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>│ └── svc.yaml
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>└── values.yaml
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>El fichero &lt;code>chart.yaml&lt;/code> contiene los metadatos del &lt;code>chart&lt;/code>, el &lt;code>values&lt;/code> contiene las claves y atributos a modificar y el templates contienen los manifiestos de kubernetes.&lt;/p>
+&lt;p>Las templates se generan como un recurso nombre de kubernetes solo que plantillando las variables para que el chart sirva a diferentes propósitos y organizaciones. Por ejemplo:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yml" data-lang="yml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">apiVersion&lt;/span>: &lt;span style="color:#ae81ff">v1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">kind&lt;/span>: &lt;span style="color:#ae81ff">Secret&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">metadata&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">name&lt;/span>: {{ &lt;span style="color:#ae81ff">template &amp;#34;fullname&amp;#34; . }}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">labels&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">app&lt;/span>: {{ &lt;span style="color:#ae81ff">template &amp;#34;fullname&amp;#34; . }}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">chart&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;{{ .Chart.Name }}-{{ .Chart.Version }}&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">release&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;{{ .Release.Name }}&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">heritage&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;{{ .Release.Service }}&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">type&lt;/span>: &lt;span style="color:#ae81ff">Opaque&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">data&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">mariadb-root-password&lt;/span>: {{ &lt;span style="color:#ae81ff">default &amp;#34;&amp;#34; .Values.mariadbRootPassword | b64enc | quote }}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">mariadb-password&lt;/span>: {{ &lt;span style="color:#ae81ff">default &amp;#34;&amp;#34; .Values.mariadbPassword | b64enc | quote }}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Este elemento de tipo secreto esta plantillado para que todos sus campos se recojan del fichero values. Esto nos permite, centralizar todos los valores en un único fichero (values.yaml) y por otra parte, permitir que nuestros elementos se kubernetes sean reutilizables.&lt;/p>
+&lt;p>Este conjunto de elementos se llama &lt;code>chart&lt;/code> y se pueden interactuar con ellos como repositorios de git.&lt;/p>
+&lt;h2 id="repositorios">Repositorios&lt;/h2>
+&lt;p>Por defecto, helm busca &lt;code>charts&lt;/code> dentro de la web de &lt;a href="https://artifacthub.io/">Artifactory Hub&lt;/a>.&lt;/p>
+&lt;p>Podríamos buscar charts con el comando:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>helm search hub &amp;lt;nombre del chart&amp;gt; &lt;span style="color:#75715e">#Buscar repositorios&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>helm search repo &amp;lt;nomrbre del repositorio&amp;gt; &lt;span style="color:#75715e">#Buscar dentro del repositorio&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>También podríamos añadir nuevos repositorios, por ejemplo, el de bitnami:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>helm repo add bitnami ht‌tps://charts.bitnami.com/bitnami
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Los repositorios que trae por defecto y los que añadimos nosotros manualmente, pueden actualizarse con el comando:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>helm repo update
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Si ahora quisieramos buscar &lt;code>charts&lt;/code> solo dentro de este repositorio podríamos hacerlo así:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>helm search repo bitnami
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="desplegando-un-chart">Desplegando un chart&lt;/h2>
+&lt;p>Podríamos desplegar un &lt;code>chart&lt;/code> con el comando &lt;code>helm install&lt;/code> pero la mayoría de ellos necesitan una personalización para que funcionen correctamente por lo que primero debemos descargarlos en local para leer su README y modificar los valores pertinentes.&lt;/p>
+&lt;p>Esto lo podríamos hacer con el comando:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>helm fetch &amp;lt;nombre repositorio&amp;gt; --untar
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Tras modificar todo lo que nos resultara necesario, podemos lanzar el siguiente comando en la ruta del repositorio:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>helm install &amp;lt;nombre del despliegue&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Podríamos desinstalarlo con el comando:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>helm uninstall &amp;lt;nombre del despliegue&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>También podríamos listar todos los charts desplegados y sus respectivas versiones con el comando:&lt;/p>
+&lt;pre tabindex="0">&lt;code class="language-helm" data-lang="helm">helm list
+&lt;/code>&lt;/pre></description></item></channel></rss>

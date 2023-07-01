@@ -1,0 +1,533 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Pabpereza - DevSecOps – database</title><link>/tags/database/</link><description>Recent content in database on Pabpereza - DevSecOps</description><generator>Hugo -- gohugo.io</generator><atom:link href="/tags/database/index.xml" rel="self" type="application/rss+xml"/><item><title>Docs: Comandos básicos</title><link>/docs/programacion/sql/comandos_basicos/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/programacion/sql/comandos_basicos/</guid><description>
+&lt;h2 id="acceder-a-mysql">Acceder a MySQL&lt;/h2>
+&lt;p>Sin especificar credenciales:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>mysql &lt;span style="color:#75715e"># Sin login&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Con usuario y contraseña (la password la pide por pantalla):&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>mysql -u root -p &lt;span style="color:#75715e"># Con usuario y contraseña&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="bases-de-datos">Bases de datos&lt;/h2>
+&lt;p>Mostrar todas:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sql" data-lang="sql">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">show&lt;/span> databases;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Crear base de datos:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sql" data-lang="sql">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">create&lt;/span> &lt;span style="color:#66d9ef">database&lt;/span> &lt;span style="color:#f92672">&amp;lt;&lt;/span>base de datos&lt;span style="color:#f92672">&amp;gt;&lt;/span>;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Borrar base de datos:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sql" data-lang="sql">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">drop&lt;/span> &lt;span style="color:#66d9ef">database&lt;/span> &lt;span style="color:#f92672">&amp;lt;&lt;/span>base de datos&lt;span style="color:#f92672">&amp;gt;&lt;/span>;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="tablas">Tablas&lt;/h2>
+&lt;p>Consultar tablas:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sql" data-lang="sql">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">show&lt;/span> tables;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Describir los atributos de una tabla:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sql" data-lang="sql">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">DESCRIBE&lt;/span> &lt;span style="color:#f92672">&amp;lt;&lt;/span>tabla&lt;span style="color:#f92672">&amp;gt;&lt;/span>;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Crear tabla:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sql" data-lang="sql">&lt;span style="display:flex;">&lt;span>mysql&lt;span style="color:#f92672">&amp;gt;&lt;/span> &lt;span style="color:#66d9ef">CREATE&lt;/span> &lt;span style="color:#66d9ef">TABLE&lt;/span> &lt;span style="color:#f92672">&amp;lt;&lt;/span>tabla&lt;span style="color:#f92672">&amp;gt;&lt;/span>(
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> id CLAVE &lt;span style="color:#66d9ef">NOT&lt;/span> &lt;span style="color:#66d9ef">NULL&lt;/span> AUTO_INCREMENT,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> nombre CHAR(&lt;span style="color:#ae81ff">30&lt;/span>) &lt;span style="color:#66d9ef">NOT&lt;/span> &lt;span style="color:#66d9ef">NULL&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> edad INTEGER(&lt;span style="color:#ae81ff">30&lt;/span>),
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> salario INTEGER(&lt;span style="color:#ae81ff">30&lt;/span>),
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">PRIMARY&lt;/span> &lt;span style="color:#66d9ef">KEY&lt;/span> (id) );
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Insertar datos:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sql" data-lang="sql">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">INSERT&lt;/span> &lt;span style="color:#66d9ef">INTO&lt;/span> &lt;span style="color:#f92672">&amp;lt;&lt;/span>tabla&lt;span style="color:#f92672">&amp;gt;&lt;/span> (nombre, edad, salario) &lt;span style="color:#66d9ef">VALUES&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>(&lt;span style="color:#e6db74">&amp;#34;Pedro&amp;#34;&lt;/span>, &lt;span style="color:#ae81ff">24&lt;/span>, &lt;span style="color:#ae81ff">21000&lt;/span>),
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> (&lt;span style="color:#e6db74">&amp;#34;Maria&amp;#34;&lt;/span>, &lt;span style="color:#ae81ff">26&lt;/span>, &lt;span style="color:#ae81ff">24000&lt;/span>),
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> (&lt;span style="color:#e6db74">&amp;#34;Juan&amp;#34;&lt;/span>, &lt;span style="color:#ae81ff">28&lt;/span>, &lt;span style="color:#ae81ff">25000&lt;/span>),
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> (&lt;span style="color:#e6db74">&amp;#34;Luis&amp;#34;&lt;/span>, &lt;span style="color:#ae81ff">35&lt;/span>, &lt;span style="color:#ae81ff">28000&lt;/span>),
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> (&lt;span style="color:#e6db74">&amp;#34;Monica&amp;#34;&lt;/span>, &lt;span style="color:#ae81ff">42&lt;/span>, &lt;span style="color:#ae81ff">30000&lt;/span>),
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> (&lt;span style="color:#e6db74">&amp;#34;Rosa&amp;#34;&lt;/span>, &lt;span style="color:#ae81ff">43&lt;/span>, &lt;span style="color:#ae81ff">25000&lt;/span>),
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> (&lt;span style="color:#e6db74">&amp;#34;Susana&amp;#34;&lt;/span>, &lt;span style="color:#ae81ff">45&lt;/span>, &lt;span style="color:#ae81ff">39000&lt;/span>);
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Actualizar datos:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sql" data-lang="sql">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">UPDATE&lt;/span> &lt;span style="color:#f92672">&amp;lt;&lt;/span>tabla&lt;span style="color:#f92672">&amp;gt;&lt;/span> &lt;span style="color:#66d9ef">SET&lt;/span> nombre &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;Pedro&amp;#34;&lt;/span> &lt;span style="color:#66d9ef">WHERE&lt;/span> id &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Obtener datos:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sql" data-lang="sql">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">SELECT&lt;/span> &lt;span style="color:#f92672">*&lt;/span> &lt;span style="color:#66d9ef">FROM&lt;/span> &lt;span style="color:#f92672">&amp;lt;&lt;/span>tabla&lt;span style="color:#f92672">&amp;gt;&lt;/span>;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Borrar datos:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sql" data-lang="sql">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">DELETE&lt;/span> &lt;span style="color:#66d9ef">FROM&lt;/span> &lt;span style="color:#f92672">&amp;lt;&lt;/span>tabla&lt;span style="color:#f92672">&amp;gt;&lt;/span> &lt;span style="color:#66d9ef">WHERE&lt;/span> id &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="salir-de-mysql">Salir de MySql&lt;/h2>
+&lt;p>Para salir del cli interactivo de mysql se puede usar la opción &lt;code>quit&lt;/code> o &lt;code>exit&lt;/code>.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sql" data-lang="sql">&lt;span style="display:flex;">&lt;span>exit;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs: Consultas y cláusulas</title><link>/docs/programacion/sql/clausulas_operadores/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/programacion/sql/clausulas_operadores/</guid><description>
+&lt;h2 id="cláusulas">Cláusulas&lt;/h2>
+&lt;p>Las consultas en SQL son una forma de acceder a la base de datos.&lt;/p>
+&lt;p>Estas consultas tienen diferentes cláusulas:&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>FROM&lt;/code>: Selecciona la tabla.&lt;/li>
+&lt;li>&lt;code>WHERE&lt;/code>: Selecciona los registros que cumplan con una condición.&lt;/li>
+&lt;li>&lt;code>ORDER BY&lt;/code>: Ordena los registros por un atributo.&lt;/li>
+&lt;li>&lt;code>GROUP BY&lt;/code>: Agrupa los registros por un atributo.&lt;/li>
+&lt;li>&lt;code>LIMIT&lt;/code>: Limita el número de registros a devolver.&lt;/li>
+&lt;li>&lt;code>HAVING&lt;/code>: Selecciona los registros que cumplan con una condición. Opera sobre los registros agrupados.&lt;/li>
+&lt;/ul>
+&lt;p>La siguiente consulta devolvería todos los registros de la tabla &lt;code>tabla&lt;/code>.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sql" data-lang="sql">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">SELECT&lt;/span> &lt;span style="color:#f92672">*&lt;/span> &lt;span style="color:#66d9ef">FROM&lt;/span> tabla;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Ejemplo where:
+La siguiente consulta devolvería el registro con el id 1 de la tabla &lt;code>tabla&lt;/code>.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sql" data-lang="sql">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">SELECT&lt;/span> &lt;span style="color:#f92672">*&lt;/span> &lt;span style="color:#66d9ef">FROM&lt;/span> tabla &lt;span style="color:#66d9ef">WHERE&lt;/span> id &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Ejemplo order by:
+Por defecto, &lt;code>ORDER BY&lt;/code> devolvería todos los registros la tabla &lt;code>tabla&lt;/code> ordenados por el &lt;code>id&lt;/code> de forma ascendente (sin especificar nada), también podría usarte el &lt;code>DESC&lt;/code> para ordenarlas de forma ascendent&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sql" data-lang="sql">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">SELECT&lt;/span> &lt;span style="color:#f92672">*&lt;/span> &lt;span style="color:#66d9ef">FROM&lt;/span> tabla &lt;span style="color:#66d9ef">ORDER&lt;/span> &lt;span style="color:#66d9ef">BY&lt;/span> id &lt;span style="color:#66d9ef">DESC&lt;/span>;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Ejemplo group by:
+La siguiente consulta devolvería todos los registros agrupados por el campo &lt;code>nombre&lt;/code>.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sql" data-lang="sql">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">SELECT&lt;/span> &lt;span style="color:#f92672">*&lt;/span> &lt;span style="color:#66d9ef">FROM&lt;/span> tabla &lt;span style="color:#66d9ef">GROUP&lt;/span> &lt;span style="color:#66d9ef">BY&lt;/span> nombre;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Ejemplo limit:
+La siguiente consulta devolvería los primeros 5 registros de la tabla &lt;code>tabla&lt;/code>.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sql" data-lang="sql">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">SELECT&lt;/span> &lt;span style="color:#f92672">*&lt;/span> &lt;span style="color:#66d9ef">FROM&lt;/span> tabla &lt;span style="color:#66d9ef">LIMIT&lt;/span> &lt;span style="color:#ae81ff">5&lt;/span>;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Ejemplo having:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sql" data-lang="sql">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">SELECT&lt;/span> &lt;span style="color:#f92672">*&lt;/span> &lt;span style="color:#66d9ef">FROM&lt;/span> tabla &lt;span style="color:#66d9ef">GROUP&lt;/span> &lt;span style="color:#66d9ef">BY&lt;/span> nombre &lt;span style="color:#66d9ef">HAVING&lt;/span> &lt;span style="color:#66d9ef">COUNT&lt;/span>(&lt;span style="color:#f92672">*&lt;/span>) &lt;span style="color:#f92672">&amp;gt;&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;hr>
+&lt;h2 id="operadores">Operadores&lt;/h2>
+&lt;p>Los operadores nos permiten establecer condiciones en las consultar, modificarlas o agruparlos.&lt;/p>
+&lt;h3 id="operadores-de-comparación">Operadores de comparación&lt;/h3>
+&lt;p>Existen diferentes operadores de comparación que nos permiten comparar dos valores.&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Operador&lt;/th>
+&lt;th>Función&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&amp;lt;&lt;/td>
+&lt;td>Menor que&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&amp;gt;&lt;/td>
+&lt;td>Mayor que&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&amp;lt;&amp;gt;&lt;/td>
+&lt;td>Distinto de&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>=&lt;/td>
+&lt;td>Igual a&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&amp;lt;=&lt;/td>
+&lt;td>Menor o igual que&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&amp;gt;=&lt;/td>
+&lt;td>Mayor o igual que&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>IN&lt;/td>
+&lt;td>Dentro de (filas de tabla)&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>NOT IN&lt;/td>
+&lt;td>Fuera de (filas de tabla)&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>BETWEEN&lt;/td>
+&lt;td>Entre (valores numéricos)&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>LIKE&lt;/td>
+&lt;td>Contiene (valor de cadena)&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;p>Algunos ejemplos:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sql" data-lang="sql">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">SELECT&lt;/span> &lt;span style="color:#f92672">*&lt;/span> &lt;span style="color:#66d9ef">FROM&lt;/span> &lt;span style="color:#66d9ef">table&lt;/span> &lt;span style="color:#66d9ef">WHERE&lt;/span> precio &lt;span style="color:#f92672">&amp;gt;&lt;/span> &lt;span style="color:#ae81ff">10&lt;/span>; &lt;span style="color:#75715e">/*Selecciona todos los registros con precio mayor a 10*/&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">SELECT&lt;/span> &lt;span style="color:#f92672">*&lt;/span> &lt;span style="color:#66d9ef">FROM&lt;/span> &lt;span style="color:#66d9ef">table&lt;/span> &lt;span style="color:#66d9ef">WHERE&lt;/span> precio &lt;span style="color:#f92672">&amp;lt;&lt;/span> &lt;span style="color:#ae81ff">10&lt;/span>; &lt;span style="color:#75715e">/*Selecciona todos los registros con precio menor a 10*/&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">SELECT&lt;/span> &lt;span style="color:#f92672">*&lt;/span> &lt;span style="color:#66d9ef">FROM&lt;/span> &lt;span style="color:#66d9ef">table&lt;/span> &lt;span style="color:#66d9ef">WHERE&lt;/span> precio &lt;span style="color:#f92672">&amp;lt;&amp;gt;&lt;/span> &lt;span style="color:#ae81ff">10&lt;/span>; &lt;span style="color:#75715e">/*Selecciona todos los registros con precio distinto a 10*/&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">SELECT&lt;/span> &lt;span style="color:#f92672">*&lt;/span> &lt;span style="color:#66d9ef">FROM&lt;/span> &lt;span style="color:#66d9ef">table&lt;/span> &lt;span style="color:#66d9ef">WHERE&lt;/span> precio &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">10&lt;/span>; &lt;span style="color:#75715e">/*Selecciona todos los registros con precio igual a 10*/&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">SELECT&lt;/span> &lt;span style="color:#f92672">*&lt;/span> &lt;span style="color:#66d9ef">FROM&lt;/span> &lt;span style="color:#66d9ef">table&lt;/span> &lt;span style="color:#66d9ef">WHERE&lt;/span> precio &lt;span style="color:#f92672">&amp;lt;=&lt;/span> &lt;span style="color:#ae81ff">10&lt;/span>; &lt;span style="color:#75715e">/*Selecciona todos los registros con precio menor o igual a 10*/&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">SELECT&lt;/span> &lt;span style="color:#f92672">*&lt;/span> &lt;span style="color:#66d9ef">FROM&lt;/span> &lt;span style="color:#66d9ef">table&lt;/span> &lt;span style="color:#66d9ef">WHERE&lt;/span> precio &lt;span style="color:#f92672">&amp;gt;=&lt;/span> &lt;span style="color:#ae81ff">10&lt;/span>; &lt;span style="color:#75715e">/*Selecciona todos los registros con precio mayor o igual a 10*/&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">SELECT&lt;/span> &lt;span style="color:#f92672">*&lt;/span> &lt;span style="color:#66d9ef">FROM&lt;/span> &lt;span style="color:#66d9ef">table&lt;/span> &lt;span style="color:#66d9ef">WHERE&lt;/span> precio &lt;span style="color:#66d9ef">IN&lt;/span> (&lt;span style="color:#ae81ff">10&lt;/span>, &lt;span style="color:#ae81ff">20&lt;/span>, &lt;span style="color:#ae81ff">30&lt;/span>); &lt;span style="color:#75715e">/*Selecciona todos los registros con precio 10, 20 o 30*/&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">SELECT&lt;/span> &lt;span style="color:#f92672">*&lt;/span> &lt;span style="color:#66d9ef">FROM&lt;/span> &lt;span style="color:#66d9ef">table&lt;/span> &lt;span style="color:#66d9ef">WHERE&lt;/span> precio &lt;span style="color:#66d9ef">NOT&lt;/span> &lt;span style="color:#66d9ef">IN&lt;/span> (&lt;span style="color:#ae81ff">10&lt;/span>, &lt;span style="color:#ae81ff">20&lt;/span>, &lt;span style="color:#ae81ff">30&lt;/span>); &lt;span style="color:#75715e">/*Selecciona todos los registros con precio distinto a 10, 20 o 30*/&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">SELECT&lt;/span> &lt;span style="color:#f92672">*&lt;/span> &lt;span style="color:#66d9ef">FROM&lt;/span> &lt;span style="color:#66d9ef">table&lt;/span> &lt;span style="color:#66d9ef">WHERE&lt;/span> precio &lt;span style="color:#66d9ef">BETWEEN&lt;/span> &lt;span style="color:#ae81ff">10&lt;/span> &lt;span style="color:#66d9ef">AND&lt;/span> &lt;span style="color:#ae81ff">20&lt;/span>; &lt;span style="color:#75715e">/*Selecciona todos los registros con precio entre 10 y 20*/&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="comparación-de-cadenas">Comparación de cadenas&lt;/h3>
+&lt;p>Concretamente el comando &lt;code>LIKE&lt;/code> nos permite buscar dentro de una cadena de texto. Este comando se aplica a los campos de tipo &lt;code>varchar&lt;/code> o &lt;code>char&lt;/code>. Se apoya en los siguientes operadores:&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Operador&lt;/th>
+&lt;th>Función&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>%&lt;/td>
+&lt;td>Comodín, representa cualquier cadena de 0 o más caracteres&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>_&lt;/td>
+&lt;td>Representa a un único carácter cualquiera&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;p>Combinando el &lt;code>LIKE&lt;/code> con el &lt;code>%&lt;/code> o con el &lt;code>_&lt;/code> podemos buscar por palabras completas o parciales.&lt;/p>
+&lt;p>Algunos ejemplos con &lt;code>%&lt;/code>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sql" data-lang="sql">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">SELECT&lt;/span> &lt;span style="color:#f92672">*&lt;/span> &lt;span style="color:#66d9ef">FROM&lt;/span> tabla &lt;span style="color:#66d9ef">WHERE&lt;/span> nombre &lt;span style="color:#66d9ef">LIKE&lt;/span> &lt;span style="color:#e6db74">&amp;#39;%Pedro%&amp;#39;&lt;/span>; &lt;span style="color:#75715e">/*Todas las filas que contengan la palabra Pedro*/&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">SELECT&lt;/span> &lt;span style="color:#f92672">*&lt;/span> &lt;span style="color:#66d9ef">FROM&lt;/span> tabla &lt;span style="color:#66d9ef">WHERE&lt;/span> nombre &lt;span style="color:#66d9ef">LIKE&lt;/span> &lt;span style="color:#e6db74">&amp;#39;Pedro%&amp;#39;&lt;/span>; &lt;span style="color:#75715e">/*Todas las filas que comiencen por Pedro*/&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">SELECT&lt;/span> &lt;span style="color:#f92672">*&lt;/span> &lt;span style="color:#66d9ef">FROM&lt;/span> tabla &lt;span style="color:#66d9ef">WHERE&lt;/span> nombre &lt;span style="color:#66d9ef">LIKE&lt;/span> &lt;span style="color:#e6db74">&amp;#39;%Pedro&amp;#39;&lt;/span>; &lt;span style="color:#75715e">/*Todas las filas que terminen por Pedro*/&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Algunos ejemplos con &lt;code>_&lt;/code>:&lt;/p>
+&lt;h3 id="operadores-lógicos">Operadores lógicos&lt;/h3>
+&lt;p>Nos permiten establecer condiciones en las consultas. También nos permite agrupar varias consultas y condiciones a su vez.&lt;/p>
+&lt;p>Los operadores lógicos son:&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Operador&lt;/th>
+&lt;th>Función&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>AND&lt;/td>
+&lt;td>Y&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>OR&lt;/td>
+&lt;td>O&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>NOT&lt;/td>
+&lt;td>No&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;p>Algunos ejemplos:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sql" data-lang="sql">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">SELECT&lt;/span> &lt;span style="color:#f92672">*&lt;/span> &lt;span style="color:#66d9ef">FROM&lt;/span> tabla &lt;span style="color:#66d9ef">WHERE&lt;/span> nombre &lt;span style="color:#66d9ef">LIKE&lt;/span> &lt;span style="color:#e6db74">&amp;#39;%Pedro%&amp;#39;&lt;/span> &lt;span style="color:#66d9ef">AND&lt;/span> precio &lt;span style="color:#f92672">&amp;lt;&lt;/span> &lt;span style="color:#ae81ff">10&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">SELECT&lt;/span> &lt;span style="color:#f92672">*&lt;/span> &lt;span style="color:#66d9ef">FROM&lt;/span> tabla &lt;span style="color:#66d9ef">WHERE&lt;/span> nombre &lt;span style="color:#66d9ef">LIKE&lt;/span> &lt;span style="color:#e6db74">&amp;#39;%Pedro%&amp;#39;&lt;/span> &lt;span style="color:#66d9ef">OR&lt;/span> precio &lt;span style="color:#f92672">&amp;lt;&lt;/span> &lt;span style="color:#ae81ff">10&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">SELECT&lt;/span> &lt;span style="color:#f92672">*&lt;/span> &lt;span style="color:#66d9ef">FROM&lt;/span> tabla &lt;span style="color:#66d9ef">WHERE&lt;/span> precio &lt;span style="color:#f92672">&amp;lt;&lt;/span> &lt;span style="color:#ae81ff">10&lt;/span> &lt;span style="color:#66d9ef">AND&lt;/span> nombre &lt;span style="color:#66d9ef">LIKE&lt;/span> &lt;span style="color:#e6db74">&amp;#39;%Pedro%&amp;#39;&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">SELECT&lt;/span> &lt;span style="color:#f92672">*&lt;/span> &lt;span style="color:#66d9ef">FROM&lt;/span> tabla &lt;span style="color:#66d9ef">WHERE&lt;/span> nombre &lt;span style="color:#66d9ef">LIKE&lt;/span> &lt;span style="color:#e6db74">&amp;#39;%Pedro%&amp;#39;&lt;/span> &lt;span style="color:#66d9ef">AND&lt;/span> precio &lt;span style="color:#f92672">&amp;lt;&lt;/span> &lt;span style="color:#ae81ff">10&lt;/span> &lt;span style="color:#66d9ef">OR&lt;/span> precio &lt;span style="color:#f92672">&amp;gt;&lt;/span> &lt;span style="color:#ae81ff">20&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">SELECT&lt;/span> &lt;span style="color:#f92672">*&lt;/span> &lt;span style="color:#66d9ef">FROM&lt;/span> tabla &lt;span style="color:#66d9ef">WHERE&lt;/span> nombre &lt;span style="color:#66d9ef">LIKE&lt;/span> &lt;span style="color:#e6db74">&amp;#39;%Pedro%&amp;#39;&lt;/span> &lt;span style="color:#66d9ef">AND&lt;/span> (precio &lt;span style="color:#f92672">&amp;lt;&lt;/span> &lt;span style="color:#ae81ff">10&lt;/span> &lt;span style="color:#66d9ef">OR&lt;/span> precio &lt;span style="color:#f92672">&amp;gt;&lt;/span> &lt;span style="color:#ae81ff">20&lt;/span>);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">SELECT&lt;/span> &lt;span style="color:#f92672">*&lt;/span> &lt;span style="color:#66d9ef">FROM&lt;/span> tabla &lt;span style="color:#66d9ef">WHERE&lt;/span> nombre &lt;span style="color:#66d9ef">LIKE&lt;/span> &lt;span style="color:#e6db74">&amp;#39;%Pedro%&amp;#39;&lt;/span> &lt;span style="color:#66d9ef">OR&lt;/span> (precio &lt;span style="color:#f92672">&amp;lt;&lt;/span> &lt;span style="color:#ae81ff">10&lt;/span> &lt;span style="color:#66d9ef">AND&lt;/span> precio &lt;span style="color:#f92672">&amp;gt;&lt;/span> &lt;span style="color:#ae81ff">20&lt;/span>);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">SELECT&lt;/span> &lt;span style="color:#f92672">*&lt;/span> &lt;span style="color:#66d9ef">FROM&lt;/span> tabla &lt;span style="color:#66d9ef">WHERE&lt;/span> (nombre &lt;span style="color:#66d9ef">LIKE&lt;/span> &lt;span style="color:#e6db74">&amp;#39;%Pedro%&amp;#39;&lt;/span> &lt;span style="color:#66d9ef">AND&lt;/span> precio &lt;span style="color:#f92672">&amp;lt;&lt;/span> &lt;span style="color:#ae81ff">10&lt;/span>) &lt;span style="color:#66d9ef">OR&lt;/span> precio &lt;span style="color:#f92672">&amp;gt;&lt;/span> &lt;span style="color:#ae81ff">20&lt;/span>;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="operadores-de-agrupación">Operadores de agrupación&lt;/h3>
+&lt;p>Nos permiten agrupar registros por un campo.&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Operador&lt;/th>
+&lt;th>Función&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>COUNT()&lt;/td>
+&lt;td>Cuenta los registros que cumplan con la condición&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>SUM()&lt;/td>
+&lt;td>Suma los valores de un campo&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>MAX()&lt;/td>
+&lt;td>Devuelve el valor máximo de un campo&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>MIN()&lt;/td>
+&lt;td>Devuelve el valor mínimo de un campo&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>AVG()&lt;/td>
+&lt;td>Devuelve la media de un campo&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;p>Algunos ejemplos:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sql" data-lang="sql">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">SELECT&lt;/span> &lt;span style="color:#66d9ef">COUNT&lt;/span>(&lt;span style="color:#f92672">*&lt;/span>) &lt;span style="color:#66d9ef">FROM&lt;/span> tabla;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">SELECT&lt;/span> &lt;span style="color:#66d9ef">SUM&lt;/span>(precio) &lt;span style="color:#66d9ef">FROM&lt;/span> tabla;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">SELECT&lt;/span> &lt;span style="color:#66d9ef">MAX&lt;/span>(precio) &lt;span style="color:#66d9ef">FROM&lt;/span> tabla;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">SELECT&lt;/span> &lt;span style="color:#66d9ef">MIN&lt;/span>(precio) &lt;span style="color:#66d9ef">FROM&lt;/span> tabla;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">SELECT&lt;/span> &lt;span style="color:#66d9ef">AVG&lt;/span>(precio) &lt;span style="color:#66d9ef">FROM&lt;/span> tabla;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="subconsultas">Subconsultas&lt;/h2>
+&lt;p>A veces, para realizar alguna operación de consulta, necesitamos los datos devueltos por otra
+consulta.&lt;/p>
+&lt;p>Una subconsulta, que no es más que una sentencia SELECT dentro de otra SELECT.&lt;/p>
+&lt;p>Las subconsultas son aquellas sentencias SELECT que forman parte de una cláusula WHERE de
+una sentencia SELECT anterior. Una subconsulta consistirá en incluir una declaración SELECT
+como parte de una cláusula WHERE.&lt;/p>
+&lt;p>Un ejemplo de subconsultas:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sql" data-lang="sql">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">SELECT&lt;/span> apellido &lt;span style="color:#66d9ef">FROM&lt;/span> empleados &lt;span style="color:#66d9ef">WHERE&lt;/span> oficio &lt;span style="color:#f92672">=&lt;/span> (&lt;span style="color:#66d9ef">SELECT&lt;/span> oficio &lt;span style="color:#66d9ef">FROM&lt;/span> empleados &lt;span style="color:#66d9ef">WHERE&lt;/span> apellido &lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#39;gil&amp;#39;&lt;/span>);
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs: Funciones en consultas</title><link>/docs/programacion/sql/funciones_en_consultas/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/programacion/sql/funciones_en_consultas/</guid><description>
+&lt;h2 id="funciones-en-consultas-de-selección">Funciones en consultas de selección&lt;/h2>
+&lt;p>Estas se utilizan para manipular y filtrar los datos que se devuelven en una consulta. Se pueden usar en las cláusulas &lt;code>WHERE&lt;/code> y &lt;code>HAVING&lt;/code> pero lo más común es usarlas en las cláusulas &lt;code>SELECT&lt;/code>.
+Esta consulta de ejemplo nos permitiría obtener el salario redondeado de todos los empleados y modificando la salida (sin alterar el registro de la basa de datos):&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sql" data-lang="sql">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">SELECT&lt;/span> nombre, ROUND(salario) &lt;span style="color:#66d9ef">FROM&lt;/span> empleados;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="funciones-aritméticas">Funciones aritméticas&lt;/h3>
+&lt;p>Nos permiten realizar operaciones aritméticas sobre los valores de los campos.&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Operador&lt;/th>
+&lt;th>Función&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>ABS()&lt;/td>
+&lt;td>Valor absoluto&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>ROUND(n,d)&lt;/td>
+&lt;td>Redondea el valor &amp;ldquo;n&amp;rdquo; con con el número de decimales especificados en &amp;ldquo;d&amp;rdquo;&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>FLOOR()&lt;/td>
+&lt;td>Redondea hacia abajo&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>CEIL()&lt;/td>
+&lt;td>Redondea hacia arriba&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>SQRT()&lt;/td>
+&lt;td>Raíz cuadrada&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>POW()&lt;/td>
+&lt;td>Potencia, ejemplo POW(x,y) el valor x elevado a el exponente y&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h3 id="funciones-de-cadenas-de-texto">Funciones de cadenas de texto&lt;/h3>
+&lt;p>Nos permiten manipular textos de las consultas.&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Operador&lt;/th>
+&lt;th>Función&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>CONCAT()&lt;/td>
+&lt;td>Concatena dos o más cadenas de texto&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>SUBSTRING(c,m,n)&lt;/td>
+&lt;td>Devuelve una sub-cadena obtenida de la cadena “c”, a partir de la posición “m” y tomando “n” caracteres.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>LENGTH()&lt;/td>
+&lt;td>Devuelve la longitud de una cadena de texto&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>UCASE()&lt;/td>
+&lt;td>Convierte una cadena de texto a mayúsculas&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>LCASE()&lt;/td>
+&lt;td>Convierte una cadena de texto a minúsculas&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>REPLACE(c,b,s)&lt;/td>
+&lt;td>Reemplaza en la cadena &amp;ldquo;c&amp;rdquo; el valor buscado en &amp;ldquo;b&amp;rdquo; por el valor indicado en &amp;ldquo;s&amp;rdquo;&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>TRIM()&lt;/td>
+&lt;td>Elimina los espacios en blanco de una cadena de texto&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>REPLICATE(c,n)&lt;/td>
+&lt;td>Repite la cadena &amp;ldquo;c&amp;rdquo; tantas veces como indique la variable &amp;ldquo;n&amp;rdquo;&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h3 id="funciones-de-fecha">Funciones de fecha&lt;/h3>
+&lt;p>Nos permiten manipular fechas de las consultas.&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Operador&lt;/th>
+&lt;th>Función&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>DATE()&lt;/td>
+&lt;td>Convierte una fecha a una cadena de texto&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>DATE_FORMAT()&lt;/td>
+&lt;td>Convierte una fecha a un formato de cadena de texto&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>NOW()&lt;/td>
+&lt;td>Devuelve la fecha actual&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>YEAR()&lt;/td>
+&lt;td>Devuelve el año de una fecha&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>MONTH()&lt;/td>
+&lt;td>Devuelve el mes de una fecha&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>QUARTER()&lt;/td>
+&lt;td>Devuelve el trimestre del año de una fecha&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>DAY()&lt;/td>
+&lt;td>Devuelve el día de una fecha&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>HOUR()&lt;/td>
+&lt;td>Devuelve la hora de una fecha&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>MINUTE()&lt;/td>
+&lt;td>Devuelve los minutos de una fecha&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>SECOND()&lt;/td>
+&lt;td>Devuelve los segundos de una fecha&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table></description></item><item><title>Docs: Combinación de tablas. Joins</title><link>/docs/programacion/sql/combinacion_joins/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/programacion/sql/combinacion_joins/</guid><description>
+&lt;p>Hay momentos en los que una consulta necesita columnas de varias tablas. En este caso podremos definir en el &lt;code>FROM&lt;/code> todas las tablas que queremos usar.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sql" data-lang="sql">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">SELECT&lt;/span> &lt;span style="color:#f92672">*&lt;/span> &lt;span style="color:#66d9ef">FROM&lt;/span> tabla1, tabla2, tabla3;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Si lo hacemos de esta forma, nos devolverá todos los registros de las tablas pero al no haberlas relacionado nos mostrará los registros de cada unos de ellas combinados entre sí.
+Estos datos no tendrían coherencia.&lt;/p>
+&lt;p>Veamos un ejemplo, vamos a usar las tablas &lt;code>empleados&lt;/code> y la tabla &lt;code>departamentos&lt;/code>:&lt;/p>
+&lt;p>EMPLEADOS&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>id&lt;/th>
+&lt;th>nombre&lt;/th>
+&lt;th>apellidos&lt;/th>
+&lt;th>departamento_id&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>1&lt;/td>
+&lt;td>Pepe&lt;/td>
+&lt;td>Pérez&lt;/td>
+&lt;td>1&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>2&lt;/td>
+&lt;td>Ana&lt;/td>
+&lt;td>Muñoz&lt;/td>
+&lt;td>1&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>3&lt;/td>
+&lt;td>Juan&lt;/td>
+&lt;td>González&lt;/td>
+&lt;td>2&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>4&lt;/td>
+&lt;td>María&lt;/td>
+&lt;td>Rubio&lt;/td>
+&lt;td>2&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;p>DEPARTAMENTOS&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>id&lt;/th>
+&lt;th>nombre&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>1&lt;/td>
+&lt;td>Ingeniería&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>2&lt;/td>
+&lt;td>Finanzas&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;p>Si quisiéramos mostrar los empleados junto con los nombres de su departamento, podríamos hacerlo de la siguiente forma:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sql" data-lang="sql">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">SELECT&lt;/span> empleados.nombre, empleados.apellidos, departamentos.nombre &lt;span style="color:#66d9ef">FROM&lt;/span> empleados, departamentos &lt;span style="color:#66d9ef">WHERE&lt;/span> empleados.departamento_id &lt;span style="color:#f92672">=&lt;/span> departamentos.id;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Cuando seleccionamos datos de varias tablas tenemos que difinir en el &lt;code>WHERE&lt;/code> la relación entre ellas. En este caso, el &lt;code>id&lt;/code> de la tabla &lt;code>empleados&lt;/code> y el &lt;code>departamento_id&lt;/code> de la tabla &lt;code>departamentos&lt;/code> porque es la única forma de mostrar el nombre del departamento al que pertenece cada empleado.&lt;/p>
+&lt;h2 id="join">JOIN&lt;/h2>
+&lt;p>El &lt;code>JOIN&lt;/code> es una forma de relacionar dos tablas y tiene varios comandos. La consulta anterior es un ejemplo de &lt;code>INNER JOIN&lt;/code> realizado con un &lt;code>WHERE&lt;/code>. Existen varios tipos de &lt;code>JOIN&lt;/code> en función de la información que quieras obtener de dos tablas relacionadas.&lt;/p>
+&lt;p>El más común es el &lt;code>INNER JOIN&lt;/code> que nos permite obtener los registros de una tabla que están relacionados con otra.&lt;/p>
+&lt;p>&lt;img src="https://www.dofactory.com/img/sql/sql-joins.png" alt="Representación visual de los diferentes tipos de joins">&lt;/p>
+&lt;p>Aunque son los más comunes, hay más tipos de los que se muestran en la representación visual. De momento nos centraremos en los más comunes:&lt;/p>
+&lt;h3 id="inner-join">INNER JOIN&lt;/h3>
+&lt;p>El &lt;code>INNER JOIN&lt;/code> nos permite seleccionar los registros que tengan coincidencias en ambas tablas, es decir, que estén relacionados. Para ello, en el &lt;code>FROM&lt;/code> seleccionamos la tabla de la que queremos obtener los registros y en el &lt;code>JOIN&lt;/code> seleccionamos la tabla con la que queremos relacionar. Por último, tendríamos que definir en el &lt;code>ON&lt;/code> del &lt;code>JOIN&lt;/code> la relación entre ambas tablas de la misma forma que en el &lt;code>WHERE&lt;/code> de la consulta anterior.&lt;/p>
+&lt;p>Ejemplo:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sql" data-lang="sql">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">SELECT&lt;/span> empleados.nombre, empleados.apellidos, departamentos.nombre &lt;span style="color:#66d9ef">FROM&lt;/span> empleados &lt;span style="color:#66d9ef">JOIN&lt;/span> departamentos &lt;span style="color:#66d9ef">ON&lt;/span> empleados.departamento_id &lt;span style="color:#f92672">=&lt;/span> departamentos.id;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="left-join">LEFT JOIN&lt;/h3>
+&lt;p>El &lt;code>LEFT JOIN&lt;/code> nos permite seleccionar todos los registros de la tabla de la izquierda junto con los registros de la tabla de la derecha que tengan coincidencias.&lt;/p>
+&lt;p>Ejemplo de uso:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sql" data-lang="sql">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">SELECT&lt;/span> empleados.nombre, empleados.apellidos, departamentos.nombre &lt;span style="color:#66d9ef">FROM&lt;/span> empleados &lt;span style="color:#66d9ef">LEFT&lt;/span> &lt;span style="color:#66d9ef">JOIN&lt;/span> departamentos &lt;span style="color:#66d9ef">ON&lt;/span> empleados.departamento_id &lt;span style="color:#f92672">=&lt;/span> departamentos.id;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="right-join">RIGHT JOIN&lt;/h3>
+&lt;p>El &lt;code>RIGHT JOIN&lt;/code> nos permite seleccionar todos los registros de la tabla de la derecha junto con los registros de la tabla de la izquierda que tengan coincidencias.&lt;/p>
+&lt;p>Ejemplo de uso:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sql" data-lang="sql">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">SELECT&lt;/span> empleados.nombre, empleados.apellidos, departamentos.nombre &lt;span style="color:#66d9ef">FROM&lt;/span> empleados &lt;span style="color:#66d9ef">RIGHT&lt;/span> &lt;span style="color:#66d9ef">JOIN&lt;/span> departamentos &lt;span style="color:#66d9ef">ON&lt;/span> empleados.departamento_id &lt;span style="color:#f92672">=&lt;/span> departamentos.id;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="full-join">FULL JOIN&lt;/h3>
+&lt;p>El &lt;code>FULL JOIN&lt;/code> nos permite seleccionar todos los registros de la tabla de la izquierda junto con los registros de la tabla de la derecha aunque no tengan coincidencias.&lt;/p>
+&lt;p>Ejemplo de uso:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sql" data-lang="sql">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">SELECT&lt;/span> empleados.nombre, empleados.apellidos, departamentos.nombre &lt;span style="color:#66d9ef">FROM&lt;/span> empleados &lt;span style="color:#66d9ef">FULL&lt;/span> &lt;span style="color:#66d9ef">JOIN&lt;/span> departamentos &lt;span style="color:#66d9ef">ON&lt;/span> empleados.departamento_id &lt;span style="color:#f92672">=&lt;/span> departamentos.id;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs: Trigger o disparador</title><link>/docs/programacion/sql/triggers/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/programacion/sql/triggers/</guid><description>
+&lt;p>Un disparador o trigger es un tipo de procedimiento almacenado que se ejecuta
+cuando se intentan alterar los datos de una tabla o vista.
+La diferencia con los procedimientos almacenados es que los disparadores:&lt;/p>
+&lt;ul>
+&lt;li>No pueden ser invocados directamente. El disparador se ejecuta automáticamente.&lt;/li>
+&lt;li>No reciben y devuelven parámetros.&lt;/li>
+&lt;li>Son apropiados para mantener la integridad de los datos, no para obtener resultados de consultas&lt;/li>
+&lt;/ul>
+&lt;p>Su función es ejecutarse cuando ocurre algún evento en una tabla. Estos eventos pueden ser insertar, modificar o borrar datos ( INSERT, UPDATE, DELETE ).&lt;/p>
+&lt;h2 id="sintaxis-básica">Sintaxis básica&lt;/h2>
+&lt;p>Antes de empezar, hay que detallar algunos variables que se usarán en el siguiente ejemplo:&lt;/p>
+&lt;ul>
+&lt;li>Nombre del disparador (&lt;code>name&lt;/code>): Nombre del disparador.&lt;/li>
+&lt;li>Tiempo del disparador (&lt;code>time&lt;/code>)[ AFTER o BEFORE ]: se puede especificar cuando se ejecuta el disparador. Antes o después de la ejecución de la consulta.&lt;/li>
+&lt;li>Evento (&lt;code>evento&lt;/code>)[ INSERT, UPDATE o DELETE ]: se puede especificar el evento en el que se desea que se ejecute el disparador.&lt;/li>
+&lt;li>Nombre de la tabla (&lt;code>nombre_tabla&lt;/code>): se puede especificar el nombre de la tabla en la que se desea que se ejecute el disparador.&lt;/li>
+&lt;li>Orden del trigger (&lt;code>orden&lt;/code> opcional) [ FOLLOWS o PRECEDES ]: se puede especificar el orden en el que se desea que se ejecute el disparador.&lt;/li>
+&lt;li>Cuerpo del disparador (&lt;code>cuerpo&lt;/code>): se puede especificar el cuerpo del disparador.&lt;/li>
+&lt;/ul>
+&lt;p>La sintaxis de un disparador es la siguiente:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sql" data-lang="sql">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">CREATE&lt;/span> &lt;span style="color:#66d9ef">TRIGGER&lt;/span> &lt;span style="color:#f92672">&amp;lt;&lt;/span>name&lt;span style="color:#f92672">&amp;gt;&lt;/span> &lt;span style="color:#f92672">&amp;lt;&lt;/span>time&lt;span style="color:#f92672">&amp;gt;&lt;/span> &lt;span style="color:#f92672">&amp;lt;&lt;/span>evento&lt;span style="color:#f92672">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">ON&lt;/span> &lt;span style="color:#f92672">&amp;lt;&lt;/span>nombre_tabla&lt;span style="color:#f92672">&amp;gt;&lt;/span> &lt;span style="color:#66d9ef">FOR&lt;/span> &lt;span style="color:#66d9ef">EACH&lt;/span> &lt;span style="color:#66d9ef">ROW&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">BEGIN&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">&amp;lt;&lt;/span>cuerpo&lt;span style="color:#f92672">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">END&lt;/span>;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Por ejemplo:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sql" data-lang="sql">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">CREATE&lt;/span> &lt;span style="color:#66d9ef">TRIGGER&lt;/span> tr_insert_persona &lt;span style="color:#66d9ef">AFTER&lt;/span> &lt;span style="color:#66d9ef">INSERT&lt;/span> &lt;span style="color:#66d9ef">ON&lt;/span> persona &lt;span style="color:#66d9ef">FOR&lt;/span> &lt;span style="color:#66d9ef">EACH&lt;/span> &lt;span style="color:#66d9ef">ROW&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">BEGIN&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;lt;&lt;/span>cuerpo&lt;span style="color:#f92672">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">END&lt;/span>;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="cuerpo-del-disparador">Cuerpo del disparador&lt;/h2>
+&lt;p>El cuerpo del disparador es el código que se ejecuta cuando se lanza el disparador. Dentro de un disparador nos podemos referir a los datos que se están insertando, modificando o borrando. Esto nos permite evitar que se borren o modifiquen datos indeseados; aplicar condiciones como por ejemplo, que haya stock suficiente para un producto.. etc.&lt;/p>
+&lt;p>El cuerpo del disparador se puede definir en varias partes. En cada parte se puede definir una sentencia SQL.&lt;/p>
+&lt;p>Por ejemplo, controlar la edad de una persona para evitar que se inserten menores de edad:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sql" data-lang="sql">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">CREATE&lt;/span> &lt;span style="color:#66d9ef">TRIGGER&lt;/span> tr_insert_persona &lt;span style="color:#66d9ef">BEFORE&lt;/span> &lt;span style="color:#66d9ef">UPDATE&lt;/span> &lt;span style="color:#66d9ef">ON&lt;/span> persona &lt;span style="color:#66d9ef">FOR&lt;/span> &lt;span style="color:#66d9ef">EACH&lt;/span> &lt;span style="color:#66d9ef">ROW&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">BEGIN&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">IF&lt;/span> &lt;span style="color:#66d9ef">NEW&lt;/span>.edad &lt;span style="color:#f92672">&amp;lt;&lt;/span> &lt;span style="color:#ae81ff">18&lt;/span> &lt;span style="color:#66d9ef">THEN&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">UPDATE&lt;/span> persona &lt;span style="color:#66d9ef">SET&lt;/span> edad &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">18&lt;/span> &lt;span style="color:#66d9ef">WHERE&lt;/span> id &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#66d9ef">NEW&lt;/span>.id;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">END&lt;/span> &lt;span style="color:#66d9ef">IF&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">END&lt;/span>;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>En el cuerpo podemos definir variables, condiciones, sentencias SQL, etc.&lt;/p>
+&lt;p>Por ejemplo, un disparador en el que consultamos y almacenamos en variables datos de otras tablas:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sql" data-lang="sql">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">CREATE&lt;/span> &lt;span style="color:#66d9ef">TRIGGER&lt;/span> tr_insert_persona &lt;span style="color:#66d9ef">AFTER&lt;/span> &lt;span style="color:#66d9ef">INSERT&lt;/span> &lt;span style="color:#66d9ef">ON&lt;/span> persona &lt;span style="color:#66d9ef">FOR&lt;/span> &lt;span style="color:#66d9ef">EACH&lt;/span> &lt;span style="color:#66d9ef">ROW&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">BEGIN&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">DECLARE&lt;/span> nombre_mascota VARCHAR(&lt;span style="color:#ae81ff">50&lt;/span>);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">SET&lt;/span> nombre_mascota &lt;span style="color:#f92672">=&lt;/span> (&lt;span style="color:#66d9ef">SELECT&lt;/span> nombre &lt;span style="color:#66d9ef">FROM&lt;/span> mascotas &lt;span style="color:#66d9ef">WHERE&lt;/span> id &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#66d9ef">NEW&lt;/span>.id);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">INSERT&lt;/span> &lt;span style="color:#66d9ef">INTO&lt;/span> persona_mascota (id, nombre, edad, fecha_nacimiento, ) &lt;span style="color:#66d9ef">VALUES&lt;/span> (&lt;span style="color:#66d9ef">NEW&lt;/span>.id, nombre_mascota, &lt;span style="color:#66d9ef">NEW&lt;/span>.edad, &lt;span style="color:#66d9ef">NEW&lt;/span>.fecha_nacimiento);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">END&lt;/span>;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>#TODO: Diferencias entre NEW y OLD&amp;hellip;&lt;/p></description></item><item><title>Docs: Exportar e importar</title><link>/docs/programacion/sql/export_import/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/programacion/sql/export_import/</guid><description>
+&lt;p>Exportar e importar bases de datos es un proceso crítico y totalmente necesario para proteger nuestros datos.&lt;/p>
+&lt;p>Estas exportaciones se puede hacer con clientes como mysql workbench, phpmyadmin, etc. En la práctica, suele haber incompatibilidades entre algunas vesiones de los clientes con el servidor de bases de datos. Personalmente, siempre recomiendo utilizar la utilidad de terminal que lleva el propio servidor para minimizar la posibilidad de errores.&lt;/p>
+&lt;p>A continuación, una lista de como exportar e importar bases de datos sql clasificados por tecnología:&lt;/p>
+&lt;h2 id="mysql">MySQL&lt;/h2>
+&lt;h3 id="exportar">Exportar&lt;/h3>
+&lt;p>Podemos exportar con el siguiente comando:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>mysqldump -u USER -p DATABASE &amp;gt; salida.sql &lt;span style="color:#75715e">#La contraseña nos la pedirá interactivamente&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Ejemplo real:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>mysqldump -u root -p database1 &amp;gt; database1.sql
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Exportar múltiples bases de datos:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>mysqldump -u root -p --databases database1 database2 database3 &amp;gt; databases.sql
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Exportar tablas específicas:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>mysqldump -u root -p --databases database1 --tables table1 table2 table3 &amp;gt; tables.sql
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="importar">Importar&lt;/h3>
+&lt;p>Podemos importar con el siguiente comando:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>mysql -u USER -p DATABASE &amp;lt; salida.sql
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item></channel></rss>

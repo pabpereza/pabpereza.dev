@@ -1,0 +1,19 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Pabpereza - DevSecOps – raspberry</title><link>/tags/raspberry/</link><description>Recent content in raspberry on Pabpereza - DevSecOps</description><generator>Hugo -- gohugo.io</generator><lastBuildDate>Sun, 27 Feb 2022 00:00:00 +0000</lastBuildDate><atom:link href="/tags/raspberry/index.xml" rel="self" type="application/rss+xml"/><item><title>Blog: Raspberry Pi Touchscreen 7</title><link>/blog/2022/02/27/raspberry-pi-touchscreen-7/</link><pubDate>Sun, 27 Feb 2022 00:00:00 +0000</pubDate><guid>/blog/2022/02/27/raspberry-pi-touchscreen-7/</guid><description>
+&lt;img src="/blog/2022/02/27/raspberry-pi-touchscreen-7/featured_raspberry_touchscreen.png_hu6867f1c1ac5b0eb5e88cae6cdcee8737_171741_640x0_resize_catmullrom_3.png" width="640" height="373"/>
+&lt;p>Las raspberry pi son de las computadoras más versátiles y asequibles que puedes encontrar en el mercado. Además, dada su popularidad, tienen una gran cantidad de software específico (pihole, piretro&amp;hellip; etc) que ayudará a darle un sinfín de usos y, por otra parte, tiene muchos accesorios que la potenciarán aún más si cabe.&lt;/p>
+&lt;p>Concretamente me refiero a la pantalla táctil de 7 pulgadas que se puede montar en cualquier raspberry pi. Esta se puede utilizar para crear un consola portátil, control industrial, etc.&lt;/p>
+&lt;figure class="card rounded p-2 td-post-card mb-4 mt-4" style="max-width: 664px">
+&lt;img class="card-img-top" src="/blog/2022/02/27/raspberry-pi-touchscreen-7/featured_raspberry_touchscreen.png_hu6867f1c1ac5b0eb5e88cae6cdcee8737_171741_700x450_fit_catmullrom_3.png" width="654" height="381">
+&lt;figcaption class="card-body px-0 pt-2 pb-0">
+&lt;p class="card-text">
+Raspberry touchscreen 7 pulgadas
+&lt;/p>
+&lt;/figcaption>
+&lt;/figure>
+&lt;h3 id="instalación-y-configuración">Instalación y configuración&lt;/h3>
+&lt;p>En este vídeo he detallado el proceso de instalación y configuración de la pantalla táctil.&lt;/p>
+&lt;div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+&lt;iframe src="https://www.youtube.com/embed/eGZvo7AnO_U" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video">&lt;/iframe>
+&lt;/div>
+&lt;h3 id="pero-y-la-carcasa">Pero, ¿y la carcasa?&lt;/h3>
+&lt;p>En la pantalla oficial no viene incluida una carcasa que proteja la parte trasera de la pantalla y la raspberry. Podemos comprarlas por precios entre 10-20€, aunque, si eres maker o tienes una impresora 3D, en la web de &lt;a href="https://www.thingiverse.com/search?q=raspberry+touchscreen+7&amp;amp;type=things&amp;amp;sort=relevant">thingiverse&lt;/a> podrás encontrar una gran variedad de modelos para hacértela tu mismo.&lt;/p></description></item></channel></rss>

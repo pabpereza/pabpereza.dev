@@ -1,0 +1,59 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Pabpereza - DevSecOps – vulnerabilidades</title><link>/tags/vulnerabilidades/</link><description>Recent content in vulnerabilidades on Pabpereza - DevSecOps</description><generator>Hugo -- gohugo.io</generator><atom:link href="/tags/vulnerabilidades/index.xml" rel="self" type="application/rss+xml"/><item><title>Docs: Escáneres de vulnerabilidades</title><link>/docs/contenedores/docker/analizar_contenedores/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/contenedores/docker/analizar_contenedores/</guid><description>
+&lt;h2 id="introducción">Introducción&lt;/h2>
+&lt;p>Los contenedores nos han permitido la facilidad y comodidad de empaquetar nuestras aplicaciones y servicios, y también nos permiten asegurar que se ejecuten de forma segura. Sin embargo, las imágenes se contruyen con muchos componentes de terceros sobre los que no tenemos visibilidad. Para esta labor tenemos diferentes herramientas que nos ayudan a analizar la seguridad de nuestros contenedores.&lt;/p>
+&lt;h2 id="herramientas">Herramientas&lt;/h2>
+&lt;h3 id="snyk---docker-desktop">Snyk - Docker Desktop&lt;/h3>
+&lt;p>Es sin duda una de las más desconocidas debido a su reciente implementación en la plataforma de Docker pero, dada su integración nativa y que no es necesario realizar instalaciones adicionales, es una herramienta más que adecuada.&lt;/p>
+&lt;p>Tiene unas limitaciones de uso mensual pero podemos iniciar sesión con una cuenta gratuita para ampliarlo. &lt;a href="https://snyk.io/">Snyk&lt;/a>.&lt;/p>
+&lt;p>Podemos utilizar esta herramienta simplemente escribiendo:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>docker scan &amp;lt;imagen&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Otra forma de utilizarla, es con el parámetro &amp;ldquo;&amp;ndash;dependency-tree&amp;rdquo;, el cuál muestra todo el árbol
+de dependencias de la images.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>docker scan --dependency-tree &amp;lt;imagen&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ├─ ca-certificates @ 20200601~deb10u1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> │ └─ openssl @ 1.1.1d-0+deb10u3
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> │ └─ openssl/libssl1.1 @ 1.1.1d-0+deb10u3
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ├─ curl @ 7.64.0-4+deb10u1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> │ └─ curl/libcurl4 @ 7.64.0-4+deb10u1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> │ ├─ e2fsprogs/libcom-err2 @ 1.44.5-1+deb10u3
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> │ ├─ krb5/libgssapi-krb5-2 @ 1.17-3
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> │ │ ├─ e2fsprogs/libcom-err2 @ 1.44.5-1+deb10u3
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> │ │ ├─ krb5/libk5crypto3 @ 1.17-3
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> │ │ │ └─ krb5/libkrb5support0 @ 1.17-3
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> │ │ ├─ krb5/libkrb5-3 @ 1.17-3
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> │ │ │ ├─ e2fsprogs/libcom-err2 @ 1.44.5-1+deb10u3
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> │ │ │ ├─ krb5/libk5crypto3 @ 1.17-3
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> │ │ │ ├─ krb5/libkrb5support0 @ 1.17-3
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> │ │ │ └─ openssl/libssl1.1 @ 1.1.1d-0+deb10u3
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> │ │ └─ krb5/libkrb5support0 @ 1.17-3
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> │ ├─ libidn2/libidn2-0 @ 2.0.5-1+deb10u1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> │ │ └─ libunistring/libunistring2 @ 0.9.10-1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> │ ├─ krb5/libk5crypto3 @ 1.17-3
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> │ ├─ krb5/libkrb5-3 @ 1.17-3
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> │ ├─ openldap/libldap-2.4-2 @ 2.4.47+dfsg-3+deb10u2
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> │ │ ├─ gnutls28/libgnutls30 @ 3.6.7-4+deb10u4
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> │ │ │ ├─ nettle/libhogweed4 @ 3.4.1-1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> │ │ │ │ └─ nettle/libnettle6 @ 3.4.1-1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> │ │ │ ├─ libidn2/libidn2-0 @ 2.0.5-1+deb10u1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> │ │ │ ├─ nettle/libnettle6 @ 3.4.1-1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> │ │ │ ├─ p11-kit/libp11-kit0 @ 0.23.15-2
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> │ │ │ │ └─ libffi/libffi6 @ 3.2.1-9
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> │ │ │ ├─ libtasn1-6 @ 4.13-3
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> │ │ │ └─ libunistring/libunistring2 @ 0.9.10-1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> │ │ ├─ cyrus-sasl2/libsasl2-2 @ 2.1.27+dfsg-1+deb10u1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> │ │ │ └─ cyrus-sasl2/libsasl2-modules-db @ 2.1.27+dfsg-1+deb10u1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> │ │ │ └─ db5.3/libdb5.3 @ 5.3.28+dfsg1-0.5
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> │ │ └─ openldap/libldap-common @ 2.4.47+dfsg-3+deb10u2
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> │ ├─ nghttp2/libnghttp2-14 @ 1.36.0-2+deb10u1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> │ ├─ libpsl/libpsl5 @ 0.20.2-2
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> │ │ ├─ libidn2/libidn2-0 @ 2.0.5-1+deb10u1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> │ │ └─ libunistring/libunistring2 @ 0.9.10-1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> │ ├─ rtmpdump/librtmp1 @ 2.4+20151223.gitfa8646d.1-2
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> │ │ ├─ gnutls28/libgnutls30 @ 3.6.7-4+deb10u4
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> │ │ ├─ nettle/libhogweed4 @ 3.4.1-1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> │ │ └─ nettle/libnettle6 @ 3.4.1-1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> │ ├─ libssh2/libssh2-1 @ 1.8.0-2.1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> │ │ └─ libgcrypt20 @ 1.8.4-5
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> │ └─ openssl/libssl1.1 @ 1.1.1d-0+deb10u3
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ├─ gnupg2/dirmngr @ 2.2.12-1+deb10u1
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item></channel></rss>

@@ -1,0 +1,166 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Pabpereza - DevSecOps – terminal</title><link>/tags/terminal/</link><description>Recent content in terminal on Pabpereza - DevSecOps</description><generator>Hugo -- gohugo.io</generator><lastBuildDate>Mon, 08 Aug 2022 00:00:00 +0000</lastBuildDate><atom:link href="/tags/terminal/index.xml" rel="self" type="application/rss+xml"/><item><title>Docs: Zsh</title><link>/docs/unix/zsh/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/unix/zsh/</guid><description>
+&lt;p>En lo personal me encanta el terminal y en lo profesional lo veo indispensable para ciertas tareas.&lt;/p>
+&lt;p>Adaptarlo a nuestras necesidades y potenciar sus utilidades de caja me parece vital si pasas muchas
+horas delante de una interfaz de comandos.&lt;/p>
+&lt;p>En esta guía explico como configurar zsh a mis gustos personales, (en este vídeo tenéis todo el proceso más detallado):
+&lt;div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+&lt;iframe src="https://www.youtube.com/embed/cyK89jHB9JA" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video">&lt;/iframe>
+&lt;/div>
+&lt;/p>
+&lt;h2 id="instalación-de-requisitos">Instalación de requisitos&lt;/h2>
+&lt;p>Con el siguiente comando podéis instalar todos los requisitos necesarios para instalar zsh:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>apt install curl zsh
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="instalación-de-ohmyzsh">Instalación de ohmyzsh&lt;/h2>
+&lt;p>Ahora que tenemos instalado zsh podemos instalar el plugin de ohmyzsh:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>sh -c &lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#66d9ef">$(&lt;/span>curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh&lt;span style="color:#66d9ef">)&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>e voila!&lt;/p>
+&lt;h2 id="opción-1---configuración-con-antigen-recomendada">Opción 1 - Configuración con antigen (recomendada)&lt;/h2>
+&lt;p>Antigen es un plugin de ohmyzsh que nos permite configurar zsh con una interfaz más sencilla, funcionando como gestor de plugins y temas.&lt;/p>
+&lt;p>Podemos descargarlo con el siguiente comando:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>curl -L git.io/antigen &amp;gt; antigen.zsh
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Es importante que tengamos localizado el archivo &lt;code>antigen.zsh&lt;/code>, personalmente lo suelo guardar dentro de la carpeta &lt;code>.oh-my-zsh&lt;/code>
+por limpieza.&lt;/p>
+&lt;h2 id="configuración-de-antigen">Configuración de antigen&lt;/h2>
+&lt;p>Para configurar antigen debemos añadir el siguiente comando en el fichero &lt;code>.zshrc&lt;/code>:&lt;/p>
+&lt;pre tabindex="0">&lt;code class="language-conf" data-lang="conf">source &amp;lt;ubicación del archivo antigen.zsh&amp;gt;
+&lt;/code>&lt;/pre>&lt;h2 id="instalación-de-plugin-y-temas">Instalación de plugin y temas&lt;/h2>
+&lt;p>Para configurar un plugin podemos usar el comando &amp;lsquo;antigen bundle&amp;rsquo; y para seleccionar un tema se usa el comando &amp;lsquo;antigen theme&amp;rsquo;.&lt;/p>
+&lt;p>Por ejemplo:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Definición de plugins&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>antigen bundle git
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>antigen bundle git-prompt
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Definición de un tema&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>antigen theme robbyrussell
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Para finalizar la configuración de antigen debemos añadir el siguiente comando en el fichero &lt;code>.zshrc&lt;/code>:&lt;/p>
+&lt;pre tabindex="0">&lt;code class="language-conf" data-lang="conf">antigen apply
+&lt;/code>&lt;/pre>&lt;p>La principal ventaja que nos aporta antigen es que deja un fichero de configuración mucho más limpio y, además, nos instala automaticamente los plugins y temas que hemos defino.&lt;/p>
+&lt;p>Las próxima vez que hagamos &lt;code>source .zshrc&lt;/code> antigen se encargará de gestionarlo todo.&lt;/p>
+&lt;p>&lt;em>Así quedaría el fichero &lt;code>.zshrc&lt;/code> completo:&lt;/em>&lt;/p>
+&lt;pre tabindex="0">&lt;code class="language-conf" data-lang="conf">source ~/.oh-my-zsh/antigen.zsh
+# Load the oh-my-zsh&amp;#39;s library.
+antigen use oh-my-zsh
+# Bundles from the default repo (robbyrussell&amp;#39;s oh-my-zsh).
+antigen bundle git
+antigen bundle git-prompt
+antigen bundle z
+antigen bundle pip
+antigen bundle kubectl
+antigen bundle git-prompt
+antigen bundle vi-mode
+antigen bundle docker
+antigen bundle docker-compose
+# Syntax highlighting bundle.
+antigen bundle zsh-users/zsh-syntax-highlighting
+antigen bundle zsh-users/zsh-autosuggestions
+# Load the theme.
+antigen theme bureau
+# Tell Antigen that you&amp;#39;re done.
+antigen apply
+&lt;/code>&lt;/pre>&lt;h2 id="opción-2---configuración-de-ohmyzsh-sin-antigen">Opción 2 - Configuración de ohmyzsh (Sin antigen)&lt;/h2>
+&lt;p>Recuerda que todas las configuraciones que hagas en zsh se guardarán en el archivo &lt;code>.zshrc&lt;/code>. Aquí podemos editar el tema, los plugins, añadir alias.. etc.&lt;/p>
+&lt;h3 id="tema">Tema&lt;/h3>
+&lt;p>Se puede editar el tema de zsh en el parámentro &lt;code>ZSH_THEME&lt;/code>: del fichero &lt;code>.zshrc&lt;/code>. Por ejemplo:&lt;/p>
+&lt;pre tabindex="0">&lt;code class="language-conf" data-lang="conf">ZSH_THEME=&amp;#34;robbyrussell&amp;#34;
+&lt;/code>&lt;/pre>&lt;p>Así se cambia al tema por defecto de ohmyzsh.&lt;/p>
+&lt;h3 id="plugins">Plugins&lt;/h3>
+&lt;p>Para añadir un plugin a zsh, debemos añadirlo en la sección &lt;code>plugins&lt;/code> del fichero &lt;code>.zshrc&lt;/code> separados por espacios. Por ejemplo:&lt;/p>
+&lt;pre tabindex="0">&lt;code class="language-conf" data-lang="conf">plugins=(git sudo docker z )
+&lt;/code>&lt;/pre>&lt;h3 id="recargar-cambios">Recargar cambios&lt;/h3>
+&lt;p>Recuerda que cada vez que modifiques el fichero .zshrc tendras que cargar de nuevo la configuración con el comando:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>source ~/.zshrc
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="autocompletado-y-resaltado-de-color">Autocompletado y resaltado de color&lt;/h3>
+&lt;p>Estas funcionalidades no vienen por defecto pero si podemos intalar los plugins para activarlos posteriormente. Aquí los enlaces a sus repositorios:
+&lt;a href="https://github.com/zsh-users/zsh-autosuggestions">autocomplete&lt;/a>
+&lt;a href="https://github.com/zsh-users/zsh-syntax-highlighting">highlight&lt;/a>&lt;/p>
+&lt;p>Los podríamos instalar respectivamente con los siguientes comandos:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#Instalar autocompletado&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>git clone https://github.com/zsh-users/zsh-autosuggestions &lt;span style="color:#e6db74">${&lt;/span>ZSH_CUSTOM&lt;span style="color:#66d9ef">:-&lt;/span>~/.oh-my-zsh/custom&lt;span style="color:#e6db74">}&lt;/span>/plugins/zsh-autosuggestions
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#Instalar resaltado de color&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>git clone https://github.com/zsh-users/zsh-syntax-highlighting.git &lt;span style="color:#e6db74">${&lt;/span>ZSH_CUSTOM&lt;span style="color:#66d9ef">:-&lt;/span>~/.oh-my-zsh/custom&lt;span style="color:#e6db74">}&lt;/span>/plugins/zsh-syntax-highlighting
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Los podríamos activar añadiéndolos en el parámetro de plugins en el fichero &lt;code>.zshrc&lt;/code>:&lt;/p>
+&lt;pre tabindex="0">&lt;code class="language-conf" data-lang="conf">plugins=(zsh-syntax-highlighting zsh-autosuggestions)
+&lt;/code>&lt;/pre></description></item><item><title>Docs: Tmux</title><link>/docs/unix/tmux/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/unix/tmux/</guid><description>
+&lt;p>En este entrada vamos a ver cómo utilizar &lt;a href="https://github.com/tmux/tmux/wiki">tmux&lt;/a>. Tmux es un multiplexor de terminales que nos permite crear sesiones de terminal, dividirlas en paneles y ventanas, y acceder a ellas desde cualquier terminal.&lt;/p>
+&lt;p>&lt;img src="https://pabpereza.dev/docs/unix/tmux.gif" alt="tmux">&lt;/p>
+&lt;h2 id="instalación">Instalación&lt;/h2>
+&lt;p>En la mayoría de distribuciones podemos instalar tmux con el gestor de paquetes de la distribución. Por ejemplo, en Ubuntu:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>sudo apt install tmux
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>En macOS podemos instalarlo con &lt;a href="https://brew.sh/">brew&lt;/a>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>brew install tmux
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="ventanas-o-pestañas">Ventanas o pestañas&lt;/h2>
+&lt;p>Dentro de una sesión de tmux, podemos crear pestañas con el comando &lt;code>Ctrl+b c&lt;/code>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>Ctrl+b c
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Para cambiar de pestaña, podemos usar el comando &lt;code>Ctrl+b n&lt;/code> para ir a la siguiente pestaña, o &lt;code>Ctrl+b p&lt;/code> para ir a la anterior:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>Ctrl+b n
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Ctrl+b p
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>También podemos ir a una pestaña concreta con el comando &lt;code>Ctrl+b &amp;lt;nombre de la pestaña&amp;gt;&lt;/code>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>Ctrl+b &lt;span style="color:#ae81ff">1&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Podemos renombrar una pestaña con el comando &lt;code>Ctrl+b ,&lt;/code>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>Ctrl+b ,
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="paneles-o-splits">Paneles o splits&lt;/h2>
+&lt;p>Dentro de una pestaña, podemos dividir la pantalla de forma vertial con el comando &lt;code>Ctrl+b %&lt;/code>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>Ctrl+b %
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>O de forma horizontal con el comando &lt;code>Ctrl+b &amp;quot;&lt;/code>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>Ctrl+b &lt;span style="color:#e6db74">&amp;#34;
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Para cambiar de panel, podemos usar el comando &lt;code>Ctrl+b&lt;/code> + las flechas de dirección o &lt;code>Ctrl+b&lt;/code> + &lt;code>hjkl&lt;/code>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>Ctrl+b &amp;lt;flecha dirección&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Maximizar un panel con el comando &lt;code>Ctrl+b z&lt;/code> y volver a la distribución original con el comando &lt;code>Ctrl+b z&lt;/code>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>Ctrl+b z
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Alternar la posición de los paneles con el comando &lt;code>Ctrl+b x&lt;/code>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>Ctrl+b x
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Podemos listar todos los paneles con el comando &lt;code>Ctrl+b w&lt;/code>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>Ctrl+b w
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Por último, podríamos rotar la posición de un panel con las teclas &lt;code>Ctrl+b {&lt;/code> y &lt;code>Ctrl+b }&lt;/code>. Esto alternaría la posición del panel actual con el siguiente:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>Ctrl+b &lt;span style="color:#f92672">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Ctrl+b &lt;span style="color:#f92672">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="sesiones">Sesiones&lt;/h2>
+&lt;p>Para crear una nueva sesión de tmux, ejecutamos el comando &lt;code>tmux&lt;/code>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>tmux
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Si queremos crear una sesión con un nombre, podemos usar el parámetro &lt;code>-s&lt;/code>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>tmux new -s my_session
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Para listar las sesiones que tenemos abiertas, podemos usar el comando &lt;code>tmux ls&lt;/code>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>tmux ls
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Para reanudar una sesión, podemos usar el comando &lt;code>tmux attach&lt;/code>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>tmux attach -t my_session
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Para reanudar la última sesión, podemos usar el comando &lt;code>tmux attach&lt;/code> sin parámetros:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>tmux attach
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Dentro de una sesión, podemos suspenderla con el comando &lt;code>Ctrl+b d&lt;/code>. Esto nos permite volver a la sesión más tarde con el comando &lt;code>tmux attach&lt;/code>.&lt;/p></description></item><item><title>Blog: Potencia powershell</title><link>/blog/2022/08/08/potencia-powershell/</link><pubDate>Mon, 08 Aug 2022 00:00:00 +0000</pubDate><guid>/blog/2022/08/08/potencia-powershell/</guid><description>
+&lt;img src="/blog/2022/08/08/potencia-powershell/featured_oh_my_posh_logo_hu6b3dddba5d5f1cd2cb252d327f3307cf_20861_640x0_resize_catmullrom_3.png" width="640" height="416"/>
+&lt;p>He de reconocer que no soy
+muy fan de powershell, es más,
+en ciertos momentos de mi vida
+he llegado a detestarlo.
+Tanto si te encanta powershell
+como si te ves forzado a usarlo, hay que reconocer quees muy mejorable.&lt;/p>
+&lt;p>En el anterior vídeo vimos el proceso de potenciar el terminal en entornos unix y linux mediante
+zsh y oh-my-zsh. &lt;a href="/blog/potencia_tu_terminal/">Aquí la entrada al blog y enlace al vídeo&lt;/a>&lt;/p>
+&lt;p>Para esta ocasión, abordaremos
+el tema en sistemas windows
+utilizando oh my posh.
+OMP nos ofrece características,
+que a día de hoy considero
+indispensables, como:&lt;/p>
+&lt;ul>
+&lt;li>Auto completado&lt;/li>
+&lt;li>Navegación simplificada&lt;/li>
+&lt;li>Información avanzada&lt;/li>
+&lt;li>Personalizacion con múltiples temas&lt;/li>
+&lt;/ul>
+&lt;p>Dentro vídeo:
+&lt;div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+&lt;iframe src="https://www.youtube.com/embed/kWIesAUhLAg" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video">&lt;/iframe>
+&lt;/div>
+&lt;/p>
+&lt;h3 id="todos-los-comandos-del-vídeo-y-enlaces-están-en-la-siguiente-página">Todos los comandos del vídeo y enlaces están en la siguiente página:&lt;/h3>
+&lt;p>&lt;strong>Documentación: &lt;a href="/docs/windows/oh_my_posh/">/docs/windows/oh_my_posh/&lt;/a>&lt;/strong>&lt;/p></description></item><item><title>Blog: Potencia tu terminal</title><link>/blog/2021/12/30/potencia-tu-terminal/</link><pubDate>Thu, 30 Dec 2021 00:00:00 +0000</pubDate><guid>/blog/2021/12/30/potencia-tu-terminal/</guid><description>
+&lt;img src="/blog/2021/12/30/potencia-tu-terminal/featured_zsh_logo_hue23e4fd3a72d80386f9064587a1a8174_29421_640x0_resize_q75_catmullrom.jpg" width="640" height="395"/>
+&lt;p>Hola y bienvenidos a un nuevo vídeo en el que hablaremos de zsh y un framework llamado oh-my-zsh. Estos te permitirán personalizar el terminal para adaptarlo a tus gustos y necesidades. Espero que después de este vídeo termines amándolo y usándolo más a menudo.&lt;/p>
+&lt;p>Dentro vídeo:
+&lt;div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+&lt;iframe src="https://www.youtube.com/embed/cyK89jHB9JA" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video">&lt;/iframe>
+&lt;/div>
+&lt;/p>
+&lt;h3 id="todos-los-comandos-del-vídeo-y-enlaces-estan-en-la-siguiente-página">Todos los comandos del vídeo y enlaces estan en la siguiente página:&lt;/h3>
+&lt;p>&lt;strong>Documentación: &lt;a href="/docs/linux/zsh/">/docs/linux/zsh/&lt;/a>&lt;/strong>&lt;/p></description></item></channel></rss>

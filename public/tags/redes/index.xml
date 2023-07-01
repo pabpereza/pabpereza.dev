@@ -1,0 +1,90 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Pabpereza - DevSecOps – redes</title><link>/tags/redes/</link><description>Recent content in redes on Pabpereza - DevSecOps</description><generator>Hugo -- gohugo.io</generator><atom:link href="/tags/redes/index.xml" rel="self" type="application/rss+xml"/><item><title>Docs: Redes</title><link>/docs/unix/redes/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/unix/redes/</guid><description>
+&lt;h2 id="utilidades-de-red">Utilidades de red&lt;/h2>
+&lt;p>Existen varias herramientas que nos ayudan a trabajar con redes:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Ping - comprueba la conexión con un hosts y si está acttivo&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ping -c &lt;span style="color:#ae81ff">4&lt;/span> google.com &lt;span style="color:#75715e"># Con el -c 4 el número de veces que se ejecuta el ping&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Traceroute - identifica la ruta que se ha recorrido para llegar a un host&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>traceroute google.com
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Netstat - muestra los puertos abiertos en el sistema&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>netstat -l
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># ARP - muestran la tabla ARP del sistema que actúa como una cache.&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>arp -a &lt;span style="color:#75715e"># Muestra la relación entre direcciones IP y direcciones MAC&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="configuración-de-una-red---comando-ip">Configuración de una red - Comando IP&lt;/h2>
+&lt;p>Con el comando &lt;code>ip&lt;/code> podemos alterar la configuración de una interfaz de red. Para ello hay múltiples opciones de este comando que debemos conocer previamente:&lt;/p>
+&lt;p>Listar las interfaces de red, información y estado:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>ip addr
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># O su versión corta&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ip a
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Ver la configuración de una interfaz de red:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>ip addr show ens33
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># O su versión corta&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ip a s ens33
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Habilitar o deshabilitar una interfaz de red:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#Habilitar&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ip link set ens33 up
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#Deshabilitar&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ip link set ens33 down
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>El estado de una interfaz de red lo podríamos ver tras el &lt;code>state&lt;/code> de la configuración de la interfaz marcado como &lt;code>UP&lt;/code> o &lt;code>DOWN&lt;/code>.:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>ip a s ens33
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ens33: &amp;lt;BROADCAST,MULTICAST,UP,LOWER_UP&amp;gt; mtu &lt;span style="color:#ae81ff">1500&lt;/span> qdisc mq state UP group default qlen &lt;span style="color:#ae81ff">1000&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>link/ether 00:15:5d:cc:35:ff brd ff:ff:ff:ff:ff:ff
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>inet 172.17.71.94/20 brd 172.17.79.255 scope global eth0
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> valid_lft forever preferred_lft forever
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>inet6 fe80::215:5dff:fecc:35ff/64 scope link
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> valid_lft forever preferred_lft forever
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="asignar-una-dirección-ip-a-una-interfaz-de-red">Asignar una dirección IP a una interfaz de red&lt;/h3>
+&lt;p>Para asignar una dirección IP a una interfaz de red debemos usar el comando &lt;code>ip addr add&lt;/code>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>ip addr add &amp;lt;IP&amp;gt;/&amp;lt;MASCARA&amp;gt; dev &amp;lt;INTERFACE&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#Por ejemplo:&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ip addr add 192.168.1.56/255.255.255.0 dev ens33
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#o&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ip addr add 192.168.1.56/24 dev ens33
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>También podríamos añadir la dirección de broadcast:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>ip addr add &amp;lt;IP&amp;gt;/&amp;lt;MASCARA&amp;gt; broadcast &amp;lt;BROADCAST&amp;gt; dev &amp;lt;INTERFACE&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># O su versión corta&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ip a a &amp;lt;IP&amp;gt;/&amp;lt;MASC
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="comprobando-la-puerta-de-enlace">Comprobando la puerta de enlace&lt;/h3>
+&lt;p>Para comprobar si una interfaz de red tiene una puerta de enlace activa podemos usar el comando &lt;code>ip route show&lt;/code>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>ip route show
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>También podemos obtener la información de enrutamiento a una IP particular usando:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>ip route get &amp;lt;IP&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="configuración-de-una-red---networkmanager">Configuración de una red - NetworkManager&lt;/h2>
+&lt;p>Antes de comenzar, vamos a parar el servicio &amp;rsquo;network-manager&amp;rsquo; para que no interfiera con nuestra configuración. Este servicio es el encargado de gestionar las redes.
+Esto lo podemos hacer con el comando:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>systemctl stop network-manager
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Para configurar una red en Ubuntu Server tendremos que crear un fichero llamado &lt;code>01-netcfg.yaml&lt;/code> en la carpeta &lt;code>/etc/netplan&lt;/code>.
+El fichero especifica por cada red si queremos utilizar DHCP, dirección IP manual (en caso de no usar DHCP), gateays y servidores DNS &lt;code>nameservers&lt;/code>.
+Ejemplo (obviar las líneas que comienzan por &lt;code>#&lt;/code> ya que son comentarios para explicar el fichero):&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">network&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">version&lt;/span>: &lt;span style="color:#ae81ff">2&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">renderer&lt;/span>: &lt;span style="color:#ae81ff">NetworkManager&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Se especifiaca cada una de las redes que queremos configurar&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">ethernets&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Ejemplo de red con DHCP que recibirá la dirección IP automáticamente&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">ens33&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">dhcp4&lt;/span>: &lt;span style="color:#66d9ef">yes&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">dhcp6&lt;/span>: &lt;span style="color:#66d9ef">yes&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">nameservers&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">addresses&lt;/span>: [&lt;span style="color:#ae81ff">8.8.8.8&lt;/span>, &lt;span style="color:#ae81ff">8.8.4.4&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Ejemplo de una red con IP manual&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">ens38&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">dhcp4&lt;/span>: &lt;span style="color:#66d9ef">no&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">dhcp6&lt;/span>: &lt;span style="color:#66d9ef">no&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">addresses&lt;/span>: [&lt;span style="color:#ae81ff">192.168.1.120&lt;/span>&lt;span style="color:#ae81ff">/24]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Se especifica la puerta de enlace. IP del router.&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">gateway4&lt;/span>: &lt;span style="color:#ae81ff">192.168.1.1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">nameservers&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">addresses&lt;/span>: [&lt;span style="color:#ae81ff">8.8.8.8&lt;/span>, &lt;span style="color:#ae81ff">8.8.4.4&lt;/span>]
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Una vez terminado de editar el fichero, tenemos que aplicar los cambios con el comando:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>netplan apply
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Finalmente, volveríamos a arrancar el servicio &amp;rsquo;network-manager&amp;rsquo; para que los cambios surjan efecto:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>systemctl start network-manager
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item></channel></rss>

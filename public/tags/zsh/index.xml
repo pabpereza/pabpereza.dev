@@ -1,0 +1,93 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Pabpereza - DevSecOps – zsh</title><link>/tags/zsh/</link><description>Recent content in zsh on Pabpereza - DevSecOps</description><generator>Hugo -- gohugo.io</generator><lastBuildDate>Thu, 30 Dec 2021 00:00:00 +0000</lastBuildDate><atom:link href="/tags/zsh/index.xml" rel="self" type="application/rss+xml"/><item><title>Docs: Zsh</title><link>/docs/unix/zsh/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/unix/zsh/</guid><description>
+&lt;p>En lo personal me encanta el terminal y en lo profesional lo veo indispensable para ciertas tareas.&lt;/p>
+&lt;p>Adaptarlo a nuestras necesidades y potenciar sus utilidades de caja me parece vital si pasas muchas
+horas delante de una interfaz de comandos.&lt;/p>
+&lt;p>En esta guía explico como configurar zsh a mis gustos personales, (en este vídeo tenéis todo el proceso más detallado):
+&lt;div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+&lt;iframe src="https://www.youtube.com/embed/cyK89jHB9JA" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video">&lt;/iframe>
+&lt;/div>
+&lt;/p>
+&lt;h2 id="instalación-de-requisitos">Instalación de requisitos&lt;/h2>
+&lt;p>Con el siguiente comando podéis instalar todos los requisitos necesarios para instalar zsh:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>apt install curl zsh
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="instalación-de-ohmyzsh">Instalación de ohmyzsh&lt;/h2>
+&lt;p>Ahora que tenemos instalado zsh podemos instalar el plugin de ohmyzsh:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>sh -c &lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#66d9ef">$(&lt;/span>curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh&lt;span style="color:#66d9ef">)&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>e voila!&lt;/p>
+&lt;h2 id="opción-1---configuración-con-antigen-recomendada">Opción 1 - Configuración con antigen (recomendada)&lt;/h2>
+&lt;p>Antigen es un plugin de ohmyzsh que nos permite configurar zsh con una interfaz más sencilla, funcionando como gestor de plugins y temas.&lt;/p>
+&lt;p>Podemos descargarlo con el siguiente comando:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>curl -L git.io/antigen &amp;gt; antigen.zsh
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Es importante que tengamos localizado el archivo &lt;code>antigen.zsh&lt;/code>, personalmente lo suelo guardar dentro de la carpeta &lt;code>.oh-my-zsh&lt;/code>
+por limpieza.&lt;/p>
+&lt;h2 id="configuración-de-antigen">Configuración de antigen&lt;/h2>
+&lt;p>Para configurar antigen debemos añadir el siguiente comando en el fichero &lt;code>.zshrc&lt;/code>:&lt;/p>
+&lt;pre tabindex="0">&lt;code class="language-conf" data-lang="conf">source &amp;lt;ubicación del archivo antigen.zsh&amp;gt;
+&lt;/code>&lt;/pre>&lt;h2 id="instalación-de-plugin-y-temas">Instalación de plugin y temas&lt;/h2>
+&lt;p>Para configurar un plugin podemos usar el comando &amp;lsquo;antigen bundle&amp;rsquo; y para seleccionar un tema se usa el comando &amp;lsquo;antigen theme&amp;rsquo;.&lt;/p>
+&lt;p>Por ejemplo:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Definición de plugins&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>antigen bundle git
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>antigen bundle git-prompt
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Definición de un tema&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>antigen theme robbyrussell
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Para finalizar la configuración de antigen debemos añadir el siguiente comando en el fichero &lt;code>.zshrc&lt;/code>:&lt;/p>
+&lt;pre tabindex="0">&lt;code class="language-conf" data-lang="conf">antigen apply
+&lt;/code>&lt;/pre>&lt;p>La principal ventaja que nos aporta antigen es que deja un fichero de configuración mucho más limpio y, además, nos instala automaticamente los plugins y temas que hemos defino.&lt;/p>
+&lt;p>Las próxima vez que hagamos &lt;code>source .zshrc&lt;/code> antigen se encargará de gestionarlo todo.&lt;/p>
+&lt;p>&lt;em>Así quedaría el fichero &lt;code>.zshrc&lt;/code> completo:&lt;/em>&lt;/p>
+&lt;pre tabindex="0">&lt;code class="language-conf" data-lang="conf">source ~/.oh-my-zsh/antigen.zsh
+# Load the oh-my-zsh&amp;#39;s library.
+antigen use oh-my-zsh
+# Bundles from the default repo (robbyrussell&amp;#39;s oh-my-zsh).
+antigen bundle git
+antigen bundle git-prompt
+antigen bundle z
+antigen bundle pip
+antigen bundle kubectl
+antigen bundle git-prompt
+antigen bundle vi-mode
+antigen bundle docker
+antigen bundle docker-compose
+# Syntax highlighting bundle.
+antigen bundle zsh-users/zsh-syntax-highlighting
+antigen bundle zsh-users/zsh-autosuggestions
+# Load the theme.
+antigen theme bureau
+# Tell Antigen that you&amp;#39;re done.
+antigen apply
+&lt;/code>&lt;/pre>&lt;h2 id="opción-2---configuración-de-ohmyzsh-sin-antigen">Opción 2 - Configuración de ohmyzsh (Sin antigen)&lt;/h2>
+&lt;p>Recuerda que todas las configuraciones que hagas en zsh se guardarán en el archivo &lt;code>.zshrc&lt;/code>. Aquí podemos editar el tema, los plugins, añadir alias.. etc.&lt;/p>
+&lt;h3 id="tema">Tema&lt;/h3>
+&lt;p>Se puede editar el tema de zsh en el parámentro &lt;code>ZSH_THEME&lt;/code>: del fichero &lt;code>.zshrc&lt;/code>. Por ejemplo:&lt;/p>
+&lt;pre tabindex="0">&lt;code class="language-conf" data-lang="conf">ZSH_THEME=&amp;#34;robbyrussell&amp;#34;
+&lt;/code>&lt;/pre>&lt;p>Así se cambia al tema por defecto de ohmyzsh.&lt;/p>
+&lt;h3 id="plugins">Plugins&lt;/h3>
+&lt;p>Para añadir un plugin a zsh, debemos añadirlo en la sección &lt;code>plugins&lt;/code> del fichero &lt;code>.zshrc&lt;/code> separados por espacios. Por ejemplo:&lt;/p>
+&lt;pre tabindex="0">&lt;code class="language-conf" data-lang="conf">plugins=(git sudo docker z )
+&lt;/code>&lt;/pre>&lt;h3 id="recargar-cambios">Recargar cambios&lt;/h3>
+&lt;p>Recuerda que cada vez que modifiques el fichero .zshrc tendras que cargar de nuevo la configuración con el comando:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>source ~/.zshrc
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="autocompletado-y-resaltado-de-color">Autocompletado y resaltado de color&lt;/h3>
+&lt;p>Estas funcionalidades no vienen por defecto pero si podemos intalar los plugins para activarlos posteriormente. Aquí los enlaces a sus repositorios:
+&lt;a href="https://github.com/zsh-users/zsh-autosuggestions">autocomplete&lt;/a>
+&lt;a href="https://github.com/zsh-users/zsh-syntax-highlighting">highlight&lt;/a>&lt;/p>
+&lt;p>Los podríamos instalar respectivamente con los siguientes comandos:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#Instalar autocompletado&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>git clone https://github.com/zsh-users/zsh-autosuggestions &lt;span style="color:#e6db74">${&lt;/span>ZSH_CUSTOM&lt;span style="color:#66d9ef">:-&lt;/span>~/.oh-my-zsh/custom&lt;span style="color:#e6db74">}&lt;/span>/plugins/zsh-autosuggestions
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#Instalar resaltado de color&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>git clone https://github.com/zsh-users/zsh-syntax-highlighting.git &lt;span style="color:#e6db74">${&lt;/span>ZSH_CUSTOM&lt;span style="color:#66d9ef">:-&lt;/span>~/.oh-my-zsh/custom&lt;span style="color:#e6db74">}&lt;/span>/plugins/zsh-syntax-highlighting
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Los podríamos activar añadiéndolos en el parámetro de plugins en el fichero &lt;code>.zshrc&lt;/code>:&lt;/p>
+&lt;pre tabindex="0">&lt;code class="language-conf" data-lang="conf">plugins=(zsh-syntax-highlighting zsh-autosuggestions)
+&lt;/code>&lt;/pre></description></item><item><title>Blog: Potencia tu terminal</title><link>/blog/2021/12/30/potencia-tu-terminal/</link><pubDate>Thu, 30 Dec 2021 00:00:00 +0000</pubDate><guid>/blog/2021/12/30/potencia-tu-terminal/</guid><description>
+&lt;img src="/blog/2021/12/30/potencia-tu-terminal/featured_zsh_logo_hue23e4fd3a72d80386f9064587a1a8174_29421_640x0_resize_q75_catmullrom.jpg" width="640" height="395"/>
+&lt;p>Hola y bienvenidos a un nuevo vídeo en el que hablaremos de zsh y un framework llamado oh-my-zsh. Estos te permitirán personalizar el terminal para adaptarlo a tus gustos y necesidades. Espero que después de este vídeo termines amándolo y usándolo más a menudo.&lt;/p>
+&lt;p>Dentro vídeo:
+&lt;div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+&lt;iframe src="https://www.youtube.com/embed/cyK89jHB9JA" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video">&lt;/iframe>
+&lt;/div>
+&lt;/p>
+&lt;h3 id="todos-los-comandos-del-vídeo-y-enlaces-estan-en-la-siguiente-página">Todos los comandos del vídeo y enlaces estan en la siguiente página:&lt;/h3>
+&lt;p>&lt;strong>Documentación: &lt;a href="/docs/linux/zsh/">/docs/linux/zsh/&lt;/a>&lt;/strong>&lt;/p></description></item></channel></rss>

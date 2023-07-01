@@ -1,0 +1,25 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Pabpereza - DevSecOps – kalilinux</title><link>/tags/kalilinux/</link><description>Recent content in kalilinux on Pabpereza - DevSecOps</description><generator>Hugo -- gohugo.io</generator><lastBuildDate>Mon, 01 Nov 2021 00:00:00 +0000</lastBuildDate><atom:link href="/tags/kalilinux/index.xml" rel="self" type="application/rss+xml"/><item><title>Blog: Kali en Docker recopilación</title><link>/blog/2021/11/01/kali-en-docker-recopilaci%C3%B3n/</link><pubDate>Mon, 01 Nov 2021 00:00:00 +0000</pubDate><guid>/blog/2021/11/01/kali-en-docker-recopilaci%C3%B3n/</guid><description>
+&lt;img src="/blog/2021/11/01/kali-en-docker-recopilaci%C3%B3n/featured_kali_en_docker_hua84c0b00509a932ac755fccfda475c2b_509673_640x0_resize_catmullrom_3.png" width="640" height="307"/>
+&lt;p>Unas semanas antes de la creación de esta web había hecho una trilogía de vídeos hablando de como utilizar el sistema operativo Kalilinux en Docker. Por dejarlos aquí archivados de alguna manera y dejar la documentación por escrito he optado por escribir esta entrada.&lt;/p>
+&lt;h1 id="ventajas-y-desventajas-de-utilizar-kalilinux-en-docker">Ventajas y desventajas de utilizar Kalilinux en Docker&lt;/h1>
+&lt;p>Bueno, yo creo que si conoces la tecnología docker la respuesta es simple. Puedes tener imágenes ligeras, con las herramientas que necesitas, preparadas para ejecutar muy rápidamente. Tambien puedes gestionarlas con un repositorio remoto y transportarlas fácilmente entre distintos entornos.&lt;/p>
+&lt;p>Pero como todo, tiene sus grandes inconvenientes. Las imágenes de docker no tienen acceso directo al hardware y eso puede lastrar un poco el rendimiento, concretamente si necesitamos la tarjeta gráfica en operaciones de computación como el cracking de contraseñas.&lt;/p>
+&lt;p>En la &lt;a href="https://www.kali.org/get-kali/">propia página&lt;/a> de Kali se puede ver la comparativa completa con todas sus opciones:&lt;/p>
+&lt;figure class="card rounded p-2 td-post-card mb-4 mt-4" style="max-width: 710px">
+&lt;img class="card-img-top" src="/blog/2021/11/01/kali-en-docker-recopilaci%C3%B3n/featured_kali_en_docker_hua84c0b00509a932ac755fccfda475c2b_509673_700x450_fit_catmullrom_3.png" width="700" height="336">
+&lt;figcaption class="card-body px-0 pt-2 pb-0">
+&lt;p class="card-text">
+Comparativa de las distintas opciones de Kalilinux.
+&lt;/p>
+&lt;/figcaption>
+&lt;/figure>
+&lt;h1 id="vídeos-explicativos">Vídeos explicativos&lt;/h1>
+&lt;div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+&lt;iframe src="https://www.youtube.com/embed/yvfXt7Ndrvc" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video">&lt;/iframe>
+&lt;/div>
+&lt;div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+&lt;iframe src="https://www.youtube.com/embed/qnsi1cnTK3A" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video">&lt;/iframe>
+&lt;/div>
+&lt;div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+&lt;iframe src="https://www.youtube.com/embed/sVJ4iocUods" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video">&lt;/iframe>
+&lt;/div></description></item></channel></rss>

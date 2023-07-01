@@ -1,0 +1,102 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Pabpereza - DevSecOps – Git</title><link>/docs/programacion/git/</link><description>Recent content in Git on Pabpereza - DevSecOps</description><generator>Hugo -- gohugo.io</generator><atom:link href="/docs/programacion/git/index.xml" rel="self" type="application/rss+xml"/><item><title>Docs: Solucionar errores</title><link>/docs/programacion/git/solucionar_errores/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/programacion/git/solucionar_errores/</guid><description>
+&lt;p>Git es un sistema muy estricto y metódico diseñado para garantizar la integridad de nuestro
+código a lo largo de infinidad de versiones y cambios generados por múltiples programadores.&lt;/p>
+&lt;p>Es normal y frecuente en estos procesos equivocarnos, como por ejemplo, escribir el mensaje
+que no era en un commit, olvidarse de añadir algún archivo en un commit o añadir el que no querías&amp;hellip; etc.&lt;/p>
+&lt;p>Por suerte, para todos ellos hay solución y veremos diferentes comandos que git ofrece para arreglar errores.&lt;/p>
+&lt;p>Vamos a ir viendo las diferentes opciones agrupadas por comandos:&lt;/p>
+&lt;h2 id="ammend---enmendar-el-commit-más-reciente">Ammend - Enmendar el commit más reciente&lt;/h2>
+&lt;p>Esta opción trabaja en conjunto con el comando commit y es una manera práctica de modificar el commit más
+reciente. Te permite combinar los cambios prepados con el commit anterior en en lugar de crear uno nuevo.&lt;/p>
+&lt;p>Sin embargo, este comando no se limita a alterar el cambio más reciente, sino que lo reemplaza por completo.
+Importante tenerlo en cuenta sobre todo en repositorios públicos cuyos commits puedan ser dependencias de otras
+ramas o herramientas.&lt;/p>
+&lt;h3 id="uso-básico">Uso básico&lt;/h3>
+&lt;p>Supón que acabas de terminar un commit y quieres modificar su mensaje porque has puesto lo que no debías. Podrías ejecutar esto:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>git commit --amend
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Tras ejecutarlo se nos mostrará el editor de texto seleccionado en git para editar el menaje del último commit. En &lt;a href="../configurar_editor_commits/#elegir-el-editor-de-commit-por-defecto">esta entrada&lt;/a> puedes
+ver como cambiar el editor de texto que git usará para estas labores.&lt;/p>
+&lt;h3 id="añadir-archivo-al-último-commit">Añadir archivo al último commit&lt;/h3>
+&lt;p>Podría pasar también, que te hubieras dejado de añadir un archivo al último commit. Es cierto que podrías crear un nuevo commit pero queda más limpio si corriges el anterior.
+Para ello añadiríamos el o los archivos que nos hubieramos dejado en el anterior commit usando el comando &amp;ldquo;add&amp;rdquo;:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>git add &amp;lt;fichero&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Y luego, volveríamos a repetir el &amp;ldquo;ammend&amp;rdquo;:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>git commit --amend
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Esto nos permitiría añadir el archivo los archivos omitidos en el commit anterior y corregir el mensaje si fuera necesario.&lt;/p>
+&lt;h2 id="reset---revertir-cambios-de-un-commit">Reset - Revertir cambios de un commit&lt;/h2>
+&lt;p>Que pasaría si hacemos lo contrario que en punto anterior, en vez de añadir un archivo, lo queremos eliminar. Muchas veces por error incluimos en el
+repositorio un archivo que no queríamos dado que contienen secretos o información importante.&lt;/p>
+&lt;h3 id="borrar-del-stage-area">Borrar del stage area&lt;/h3>
+&lt;p>Si solo lo hemos mandado al &amp;ldquo;stage&amp;rdquo; area, podríamos quitarlo de ahí con el siguiente comando:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>git reset &amp;lt;fichero a eliminar&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="revertir-un-commit">Revertir un commit&lt;/h3>
+&lt;p>En caso de haberlo añadido al &amp;ldquo;stage area&amp;rdquo; y haber hecho un commit, podríamos revertir el cambio con el siguiente comando:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>git reset --soft HEAD~1 &lt;span style="color:#75715e">#Revertir el último commit&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>git reset &amp;lt;archivo a eliminar&amp;gt; &lt;span style="color:#75715e">#Resturar el archivo del commiteado por error&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>rm &amp;lt;archivo a eliminar&amp;gt; &lt;span style="color:#75715e">#Eliminar el archivo del repositorio&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>git commit &lt;span style="color:#75715e">#Hacer el commit&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Esto revertirá el último commit, eliminará el archivo y añadira un nuevo commit en su lugar.&lt;/p>
+&lt;h3 id="volver-a-un-estado-anterior-tras-muchos-cambios">Volver a un estado anterior tras muchos cambios&lt;/h3>
+&lt;p>Podría pasar, ya en el peor de los casos, que hubieramos hecho muchos cambios mal y quisieramos volver a un estado anterior.
+Primero podríamos consultar el historial de commits con el comando &amp;ldquo;log&amp;rdquo; o &amp;ldquo;reflog&amp;rdquo; y ver la referencia del commit al que queremos volver:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>git log
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>git reflog
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Con la referencia del commit al que queremos volver, podemos revertir el commit con el siguiente comando:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>git reset HEAD@&lt;span style="color:#f92672">{&lt;/span>Referencia&lt;span style="color:#f92672">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="volver-al-último-commit-rápidamente">Volver al último commit rápidamente&lt;/h3>
+&lt;p>Para volver al último commit sin tener que consultar el historial, podemos usar el comando &amp;ldquo;reset&amp;rdquo; con el parámetro &amp;ldquo;&amp;ndash;hard&amp;rdquo;:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>git reset --hard HEAD
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="branch---errores-en-ramas">Branch - Errores en ramas&lt;/h2>
+&lt;p>En este apartado veremos los errores más comunes que pueden ocurrir en las ramas.&lt;/p>
+&lt;h3 id="nombre-de-rama-equivocado">Nombre de rama equivocado&lt;/h3>
+&lt;p>Es frecuente que con las prisas escribamos el nombre de una rama con un nombre equivocado. Aquí la solución es simple, dentro del comando branch esta
+el parámetro &amp;ldquo;-m&amp;rdquo; que nos permite cambiar el nombre de la rama:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>git branch -m nombre-rama-equivocada nombre-rama-correcta
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="commit-a-la-rama-principal">Commit a la rama principal&lt;/h3>
+&lt;p>Podríamos hacer sin querer un commit en la rama principal, por ejemplo, main cuando nuestro sistema de organización es hacer ramas distintas para
+cada característica nueva que se desarrolla o trabajar primero en develop y luego integrar los cambios en main.&lt;/p>
+&lt;p>En varios pasos podríamos crear una rama con todos los cambios que acabamos de generar y luego, en el siguiente paso, resetear la rama principal
+al commit anterior:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>git branch nombre-rama-nueva-con-los-cambios &lt;span style="color:#75715e">#Creamos una rama con los cambios&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>git reset HEAD~ --hard &lt;span style="color:#75715e">#Reseteamos la rama principal al commit anterior&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>git checkout nombre-rama-nueva-con-los-cambios &lt;span style="color:#75715e">#Cambiamos a la rama nueva&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>En el último paso, nos cambiaríamos a la rama nueva para seguir trabajando con los cambios habiendo dejado limpia la rama principal.&lt;/p>
+&lt;h2 id="eliminar-secretos-tanto-en-local-como-en-remoto">Eliminar secretos tanto en local como en remoto&lt;/h2>
+&lt;p>En este apartado veremos como eliminar los secretos de un repositorio local o remoto. Es
+muy frecuente sin querer introducir tokens o contraseñas en un repositorio. Aunque los borremos posteriormente,
+estos, se mantendrán en el historial de git.&lt;/p>
+&lt;p>Podemos borrar un archivo de toda la historia con el siguiente comando:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span> git filter-branch --force --index-filter &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> &lt;span style="color:#e6db74">&amp;#34;git rm --cached --ignore-unmatch ARCHIVO-SENSIBLE&amp;#34;&lt;/span> &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --prune-empty --tag-name-filter cat -- --all
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> git push --force --verbose --dry-run
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> git push --force
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs: Configuración</title><link>/docs/programacion/git/configurar_editor_commits/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/programacion/git/configurar_editor_commits/</guid><description>
+&lt;h2 id="elegir-el-editor-de-commit-por-defecto">Elegir el editor de commit por defecto&lt;/h2>
+&lt;p>Dependiendo del sistema operativo en el que nos encontremos Git utilizara un editor u otro para los mensajes de commit en el terminal. En algunos por defecto es nano, en otros vim, gedit&amp;hellip; etc. Con el siguiente comando puedes elegir el que más se adapte a tus gustos y necesidades.&lt;/p>
+&lt;p>En mi caso, prefiero Vim y usaría el siguiente comando:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>git config --global core.editor &lt;span style="color:#e6db74">&amp;#34;vim&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>También serviría para Neovim usando:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>git config --global core.editor &lt;span style="color:#e6db74">&amp;#34;nvim&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Si quisieras usar nano sería tan fácil como usar el siguiente:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>git config --global core.editor &lt;span style="color:#e6db74">&amp;#34;nano&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="configurar-identidad">Configurar identidad&lt;/h2>
+&lt;p>Si es la primera vez que utilizamos git en un sistema, al hacer un commit, es obligatorio que este quere registrado con el nombre y email de un usuario. Se puede configurar con los siguientes comandos:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>git config --global user.name &lt;span style="color:#e6db74">&amp;#34;John Doe&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>git config --global user.email &lt;span style="color:#e6db74">&amp;#34;johndoe@example.com&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs: Index lock</title><link>/docs/programacion/git/index_lock/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/programacion/git/index_lock/</guid><description>
+&lt;p>Git tiene un sistema de funcionamiento muy estricto para evitar conflictos y ayudarnos a mantener nuestro bien versionado.
+Para ello, solo a un proceso realziar cambios a la vez para mantener la integridad de la información.&lt;/p>
+&lt;p>Cuando realizamos cualquier tarea en git, un commit, push, pull&amp;hellip; este genera un archivo llamado &amp;ldquo;index.lock&amp;rdquo; y lo guarda
+dentro de la carpeta &amp;ldquo;.git&amp;rdquo; en la raiz del repositorio.&lt;/p>
+&lt;p>Este archivo bloquea el repositorio ante cualquier otro acceso o proceso simult�neo que quiera realizar cambios. En algunos casos,
+poco frecuentes, puede pasar que una acción o tarea nunca termine ( por fallo del SO u otros) y el repositorio se quede bloqueado.&lt;/p>
+&lt;p>Si tenemos claro lo que estamos haciendo, podríamos borrar simplemente este archivo con el comando:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>rm .git/index.lock
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Así de simple conseguiríamos quitar el bloqueo de git pero &lt;em>atención&lt;/em> que no tengamos otro proceso ejecutando alguna tarea sobre git
+o podríamos corromper datos del repositorio.&lt;/p></description></item><item><title>Docs: Claves ssh</title><link>/docs/programacion/git/claves_ssh/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/programacion/git/claves_ssh/</guid><description>
+&lt;h2 id="usar-una-clave-específica-por-repositorio">Usar una clave específica por repositorio&lt;/h2>
+&lt;p>Puede ocurrir, por ejemplo usando github, que tengamos varias cuentas y no podamos usar la misma clave ssh que tenemos en el sistema para todos los repositorios. Este problema surge a raiz de que github no permite tener la misma clave ssh repetida en diferentes cuentas.&lt;/p>
+&lt;p>En nuestro local podríamos generar otra pareja de claves que tuvieran otro nombre y luego en nuestro repositorio de git, especificar manualmente que clave queremos que use nuestro repositorio.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>git config --local core.sshCommand &lt;span style="color:#e6db74">&amp;#34;ssh -i ~/.ssh/id_rsa_personal -F /dev/null&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item></channel></rss>

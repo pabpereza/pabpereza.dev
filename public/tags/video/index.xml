@@ -1,0 +1,18 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Pabpereza - DevSecOps – video</title><link>/tags/video/</link><description>Recent content in video on Pabpereza - DevSecOps</description><generator>Hugo -- gohugo.io</generator><lastBuildDate>Sun, 12 Dec 2021 00:00:00 +0000</lastBuildDate><atom:link href="/tags/video/index.xml" rel="self" type="application/rss+xml"/><item><title>Blog: Errores comunes en Git</title><link>/blog/2021/12/12/errores-comunes-en-git/</link><pubDate>Sun, 12 Dec 2021 00:00:00 +0000</pubDate><guid>/blog/2021/12/12/errores-comunes-en-git/</guid><description>
+&lt;img src="/blog/2021/12/12/errores-comunes-en-git/featured_git_hucca589efda708c57ef846517ae61dd64_57522_640x0_resize_catmullrom_3.png" width="640" height="273"/>
+&lt;p>Hola y bienvenidos a una nueva entrada del blog. En este artículo se explicarán los errores más comunes en git y como solucionarlos.&lt;/p>
+&lt;figure class="card rounded p-2 td-post-card mb-4 mt-4" style="max-width: 710px">
+&lt;img class="card-img-top" src="/blog/2021/12/12/errores-comunes-en-git/featured_git_hucca589efda708c57ef846517ae61dd64_57522_700x450_fit_catmullrom_3.png" width="700" height="299">
+&lt;figcaption class="card-body px-0 pt-2 pb-0">
+&lt;p class="card-text">
+Logo de git
+&lt;/p>
+&lt;/figcaption>
+&lt;/figure>
+&lt;p>Git es un sistma metódico de control de versiones, que permite almacenar una serie de cambios en un repositorio de código fuente. Durante los
+procesos de desarrollo es muy habitual que se cometan ciertos errores al trabajar con git. No pasa nada, es normal y más cuando se esta aprendiendo.&lt;/p>
+&lt;p>En este vídeo comento los que considero más comunes pero no dudes en contribuir si se te ocurre algún error que no se haya explicado.
+Todos los comandos los puedes encontrar en la &lt;a href="/docs/programacion/git/solucionar_errores">documentación&lt;/a> por escrito. Para todo lo demás, dentro vídeo:&lt;/p>
+&lt;div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+&lt;iframe src="https://www.youtube.com/embed/9sK_is8ufbk" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video">&lt;/iframe>
+&lt;/div></description></item></channel></rss>

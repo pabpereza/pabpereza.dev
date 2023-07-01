@@ -1,0 +1,10 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Pabpereza - DevSecOps – bash</title><link>/tags/bash/</link><description>Recent content in bash on Pabpereza - DevSecOps</description><generator>Hugo -- gohugo.io</generator><lastBuildDate>Thu, 30 Dec 2021 00:00:00 +0000</lastBuildDate><atom:link href="/tags/bash/index.xml" rel="self" type="application/rss+xml"/><item><title>Blog: Potencia tu terminal</title><link>/blog/2021/12/30/potencia-tu-terminal/</link><pubDate>Thu, 30 Dec 2021 00:00:00 +0000</pubDate><guid>/blog/2021/12/30/potencia-tu-terminal/</guid><description>
+&lt;img src="/blog/2021/12/30/potencia-tu-terminal/featured_zsh_logo_hue23e4fd3a72d80386f9064587a1a8174_29421_640x0_resize_q75_catmullrom.jpg" width="640" height="395"/>
+&lt;p>Hola y bienvenidos a un nuevo vídeo en el que hablaremos de zsh y un framework llamado oh-my-zsh. Estos te permitirán personalizar el terminal para adaptarlo a tus gustos y necesidades. Espero que después de este vídeo termines amándolo y usándolo más a menudo.&lt;/p>
+&lt;p>Dentro vídeo:
+&lt;div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+&lt;iframe src="https://www.youtube.com/embed/cyK89jHB9JA" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video">&lt;/iframe>
+&lt;/div>
+&lt;/p>
+&lt;h3 id="todos-los-comandos-del-vídeo-y-enlaces-estan-en-la-siguiente-página">Todos los comandos del vídeo y enlaces estan en la siguiente página:&lt;/h3>
+&lt;p>&lt;strong>Documentación: &lt;a href="/docs/linux/zsh/">/docs/linux/zsh/&lt;/a>&lt;/strong>&lt;/p></description></item></channel></rss>

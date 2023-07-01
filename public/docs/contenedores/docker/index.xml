@@ -1,0 +1,148 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Pabpereza - DevSecOps – Docker</title><link>/docs/contenedores/docker/</link><description>Recent content in Docker on Pabpereza - DevSecOps</description><generator>Hugo -- gohugo.io</generator><lastBuildDate>Mon, 20 Dec 2021 00:00:00 +0000</lastBuildDate><atom:link href="/docs/contenedores/docker/index.xml" rel="self" type="application/rss+xml"/><item><title>Docs: Comandos docker</title><link>/docs/contenedores/docker/comandos_generales/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/contenedores/docker/comandos_generales/</guid><description>
+&lt;p>Introducir usuario en el grupo docker&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>sudo usermod -a -G docker &lt;span style="color:#f92672">[&lt;/span>nombre_usuario&lt;span style="color:#f92672">]&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p> 
+Refrescar grupo sin tener que reiniciar&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>newgrp docker
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p> 
+Buscar un contenedor para descargar&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>docker search &lt;span style="color:#f92672">[&lt;/span>nombre_contenedor&lt;span style="color:#f92672">]&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p> 
+Instalar una imagen&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>docker pull &lt;span style="color:#f92672">[&lt;/span>nombre_imagen&lt;span style="color:#f92672">]&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p> 
+Listar imágenes instaladas&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>docker images
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Ver imágenes ejecutándose&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>docker ps
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p> 
+Iniciar una imagen&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>docker run &lt;span style="color:#f92672">[&lt;/span>nombre_imagen&lt;span style="color:#f92672">]&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p> 
+Para acceder al contenedor, además de crearlo, se puede hacer de dos maneras. Una es haciendo referencia al IMAGE ID y otra al repositorio (REPOSITORY) y la etiqueta (TAG).&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>docker run -i -t b72889fa879c /bin/bash
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>docker run -i -t ubuntu:14.04 /bin/bash
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p> 
+El usuario también puede ponerle una etiqueta personalizada que haga referencia a una imagen instalada en su sistema.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>docker tag b72889fa879c oldlts:latest
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p> 
+Para crear el contenedor y ponerlo en marcha hay que seguir el mismo paso de antes, pero cambiando la referencia por la etiqueta creada por el usuario.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>docker run -i -t oldlts:latest /bin/bash
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p> 
+Para iniciar un contenedor en modo demonio&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>docker run -d &lt;span style="color:#f92672">[&lt;/span>identificador_imagen&lt;span style="color:#f92672">]&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p> 
+ 
+Como ya hemos comentado, cada vez que ejecutamos el comando run estamos creando un contenedor nuevo, por lo que lo recomendable es ejecutarlo tan solo una vez. Luego podemos listar los contenedores disponibles a través del siguiente comando.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>docker ps -a
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p> 
+Hay dos maneras de poner en marcha el contenedor a través del mismo comando, pudiéndose utilizar su identificador (CONTAINER ID) o su nombre (NAMES).&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>docker start ef7e107e0aae
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>docker start lonely_wing
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p> 
+Si se quiere acceder (attach, que se podría traducir por adjuntar o unir) al contenedor se puede recurrir a una de estas dos opciones.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>docker attach ef7e107e0aae
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>docker attach lonely_wing
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Salir del terminal de docker sin apagarlo
+Control + P &amp;amp; Control + Q &lt;/p>
+&lt;p>Para detener un contenedor&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>docker stop ef7e107e0aae
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>docker stop lonely_wing
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p> 
+Para borrar un contenedor&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>docker rm ef7e107e0aae
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>docker rm lonely_wing
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Parar todos los contenedores&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>docker stop &lt;span style="color:#66d9ef">$(&lt;/span>docker ps -a -q&lt;span style="color:#66d9ef">)&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Terminal de un contenedor arrancado&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>docker exec -ti f38197856de0 /bin/bash
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p> 
+Eliminar todos los contenedores&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>docker rm &lt;span style="color:#66d9ef">$(&lt;/span>docker ps -a -q&lt;span style="color:#66d9ef">)&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p> 
+Eliminar todas las imágenes&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>docker rmi &lt;span style="color:#66d9ef">$(&lt;/span>docker images -q&lt;span style="color:#66d9ef">)&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p> 
+Realizar commit de una imagen&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>docker commit -a &lt;span style="color:#e6db74">&amp;#34;[información creador]&amp;#34;&lt;/span> -m &lt;span style="color:#e6db74">&amp;#34;[versión del programa]&amp;#34;&lt;/span> &lt;span style="color:#f92672">[&lt;/span>identificador_container&lt;span style="color:#f92672">]&lt;/span> &lt;span style="color:#f92672">[&lt;/span>nombre_repositorio:nombre_TAG&lt;span style="color:#f92672">]&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p> 
+Obtener la ruta del registro de un contenedor&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>docker inspect --format&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#39;{{.LogPath}}&amp;#39;&lt;/span> $ID_CONTENEDOR
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs: Fundamentos</title><link>/docs/contenedores/docker/fundamentos/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/contenedores/docker/fundamentos/</guid><description>
+&lt;p>Docker es un proyecto de código abierto que automatiza el despliegue de aplicaciones dentro de contenedores de software. Comenzó como un proyecto interno dentro de dotCloud, empresa enfocada a una plataforma como un servicio PaaS (Platform as a Service). Fué iniciado por Solomon Hykes con contribuciones de otros ingenieros de la compañia.&lt;/p>
+&lt;p>Docker fué liberado como código abierto en 2013. El 13 de marzo de 2014, con el lanzamiento de la versión 0.9 se dejó de utilizar LXC como entorno de ejecución por defecto y lo reemplazó con su propia biblioteca, libcontainer, escrito en Go. Para 2015 el proyecto ya tenía más 20.000 estrellas en GitHub y más de 900 colaboradores.&lt;/p>
+&lt;h1 id="pero-cómo-funciona">Pero&amp;hellip; ¿Cómo funciona?&lt;/h1>
+&lt;p>Docker se basa en la ejecución de procesos aislados entre sí y empaquetados en &amp;ldquo;contenedores&amp;rdquo; con todas las dependencias necesarias para funcionar.&lt;/p>
+&lt;p>Esto es posible gracias a dos funcionalidades del kernel de linux que se llaman &amp;ldquo;namespaces&amp;rdquo; y &amp;ldquo;cgroups&amp;rdquo;.&lt;/p>
+&lt;p>El soporte de los namescaces o espacios de nombres aísla la vista que tiene una aplicación de su entorno operativo,​ incluyendo árboles de proceso, red, ID de usuario y sistemas de archivos montados. Por otra parte, los cgroups del kernel proporcionan aislamiento de recursos, incluyendo la CPU, la memoria, el bloque de E/S y de la red.&lt;/p>
+&lt;p>Como resumen, se lanza un proceso aislado con todas las dependencias necesarias para que funcione.&lt;/p>
+&lt;h1 id="arquitectura-de-docker">Arquitectura de Docker&lt;/h1>
+&lt;p>Hemos hablado de procesos y contenedores, pero esto es solo una pequeña pieza de todos los objetos que conforman Docker a día de hoy.&lt;/p>
+&lt;p>&lt;img src="https://docs.docker.com/engine/images/architecture.svg" alt="">&lt;/p></description></item><item><title>Docs: Save y Load</title><link>/docs/contenedores/docker/cargar_guardar/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/contenedores/docker/cargar_guardar/</guid><description>
+&lt;p>Estos comandos nos permiten guardar y cargar imágenes de docker. Aunque lo común es que las imágenes se descarguen de un repositorio, en ocasiones puede ser útil guardarlas en un fichero y cargarlas en otro equipo mediante ficheros tar.&lt;/p>
+&lt;h2 id="guardar-una-imagen">Guardar una imagen&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>docker save -o &amp;lt;nombre_imagen&amp;gt;.tar &amp;lt;nombre_imagen&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="cargar-una-imagen">Cargar una imagen&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>docker load -i &amp;lt;nombre_imagen&amp;gt;.tar
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>También puedes ver un vídeo de youtube sobre este tema:&lt;/p>
+&lt;div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+&lt;iframe src="https://www.youtube.com/embed/P2CGj6aSg6w" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video">&lt;/iframe>
+&lt;/div></description></item><item><title>Docs: Escáneres de vulnerabilidades</title><link>/docs/contenedores/docker/analizar_contenedores/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/contenedores/docker/analizar_contenedores/</guid><description>
+&lt;h2 id="introducción">Introducción&lt;/h2>
+&lt;p>Los contenedores nos han permitido la facilidad y comodidad de empaquetar nuestras aplicaciones y servicios, y también nos permiten asegurar que se ejecuten de forma segura. Sin embargo, las imágenes se contruyen con muchos componentes de terceros sobre los que no tenemos visibilidad. Para esta labor tenemos diferentes herramientas que nos ayudan a analizar la seguridad de nuestros contenedores.&lt;/p>
+&lt;h2 id="herramientas">Herramientas&lt;/h2>
+&lt;h3 id="snyk---docker-desktop">Snyk - Docker Desktop&lt;/h3>
+&lt;p>Es sin duda una de las más desconocidas debido a su reciente implementación en la plataforma de Docker pero, dada su integración nativa y que no es necesario realizar instalaciones adicionales, es una herramienta más que adecuada.&lt;/p>
+&lt;p>Tiene unas limitaciones de uso mensual pero podemos iniciar sesión con una cuenta gratuita para ampliarlo. &lt;a href="https://snyk.io/">Snyk&lt;/a>.&lt;/p>
+&lt;p>Podemos utilizar esta herramienta simplemente escribiendo:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>docker scan &amp;lt;imagen&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Otra forma de utilizarla, es con el parámetro &amp;ldquo;&amp;ndash;dependency-tree&amp;rdquo;, el cuál muestra todo el árbol
+de dependencias de la images.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>docker scan --dependency-tree &amp;lt;imagen&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ├─ ca-certificates @ 20200601~deb10u1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> │ └─ openssl @ 1.1.1d-0+deb10u3
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> │ └─ openssl/libssl1.1 @ 1.1.1d-0+deb10u3
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ├─ curl @ 7.64.0-4+deb10u1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> │ └─ curl/libcurl4 @ 7.64.0-4+deb10u1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> │ ├─ e2fsprogs/libcom-err2 @ 1.44.5-1+deb10u3
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> │ ├─ krb5/libgssapi-krb5-2 @ 1.17-3
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> │ │ ├─ e2fsprogs/libcom-err2 @ 1.44.5-1+deb10u3
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> │ │ ├─ krb5/libk5crypto3 @ 1.17-3
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> │ │ │ └─ krb5/libkrb5support0 @ 1.17-3
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> │ │ ├─ krb5/libkrb5-3 @ 1.17-3
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> │ │ │ ├─ e2fsprogs/libcom-err2 @ 1.44.5-1+deb10u3
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> │ │ │ ├─ krb5/libk5crypto3 @ 1.17-3
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> │ │ │ ├─ krb5/libkrb5support0 @ 1.17-3
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> │ │ │ └─ openssl/libssl1.1 @ 1.1.1d-0+deb10u3
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> │ │ └─ krb5/libkrb5support0 @ 1.17-3
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> │ ├─ libidn2/libidn2-0 @ 2.0.5-1+deb10u1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> │ │ └─ libunistring/libunistring2 @ 0.9.10-1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> │ ├─ krb5/libk5crypto3 @ 1.17-3
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> │ ├─ krb5/libkrb5-3 @ 1.17-3
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> │ ├─ openldap/libldap-2.4-2 @ 2.4.47+dfsg-3+deb10u2
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> │ │ ├─ gnutls28/libgnutls30 @ 3.6.7-4+deb10u4
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> │ │ │ ├─ nettle/libhogweed4 @ 3.4.1-1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> │ │ │ │ └─ nettle/libnettle6 @ 3.4.1-1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> │ │ │ ├─ libidn2/libidn2-0 @ 2.0.5-1+deb10u1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> │ │ │ ├─ nettle/libnettle6 @ 3.4.1-1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> │ │ │ ├─ p11-kit/libp11-kit0 @ 0.23.15-2
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> │ │ │ │ └─ libffi/libffi6 @ 3.2.1-9
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> │ │ │ ├─ libtasn1-6 @ 4.13-3
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> │ │ │ └─ libunistring/libunistring2 @ 0.9.10-1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> │ │ ├─ cyrus-sasl2/libsasl2-2 @ 2.1.27+dfsg-1+deb10u1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> │ │ │ └─ cyrus-sasl2/libsasl2-modules-db @ 2.1.27+dfsg-1+deb10u1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> │ │ │ └─ db5.3/libdb5.3 @ 5.3.28+dfsg1-0.5
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> │ │ └─ openldap/libldap-common @ 2.4.47+dfsg-3+deb10u2
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> │ ├─ nghttp2/libnghttp2-14 @ 1.36.0-2+deb10u1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> │ ├─ libpsl/libpsl5 @ 0.20.2-2
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> │ │ ├─ libidn2/libidn2-0 @ 2.0.5-1+deb10u1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> │ │ └─ libunistring/libunistring2 @ 0.9.10-1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> │ ├─ rtmpdump/librtmp1 @ 2.4+20151223.gitfa8646d.1-2
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> │ │ ├─ gnutls28/libgnutls30 @ 3.6.7-4+deb10u4
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> │ │ ├─ nettle/libhogweed4 @ 3.4.1-1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> │ │ └─ nettle/libnettle6 @ 3.4.1-1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> │ ├─ libssh2/libssh2-1 @ 1.8.0-2.1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> │ │ └─ libgcrypt20 @ 1.8.4-5
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> │ └─ openssl/libssl1.1 @ 1.1.1d-0+deb10u3
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ├─ gnupg2/dirmngr @ 2.2.12-1+deb10u1
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item></channel></rss>

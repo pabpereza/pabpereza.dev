@@ -1,0 +1,40 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Pabpereza - DevSecOps – noticia</title><link>/tags/noticia/</link><description>Recent content in noticia on Pabpereza - DevSecOps</description><generator>Hugo -- gohugo.io</generator><lastBuildDate>Thu, 01 Dec 2022 00:00:00 +0000</lastBuildDate><atom:link href="/tags/noticia/index.xml" rel="self" type="application/rss+xml"/><item><title>Blog: Crea y comparte backups en docker</title><link>/blog/2022/12/01/crea-y-comparte-backups-en-docker/</link><pubDate>Thu, 01 Dec 2022 00:00:00 +0000</pubDate><guid>/blog/2022/12/01/crea-y-comparte-backups-en-docker/</guid><description>
+&lt;img src="/blog/2022/12/01/crea-y-comparte-backups-en-docker/featured_docker_backups.png_hu6ab1f8e148231cfb753b2057a5220ad7_43192_640x0_resize_q75_h2_catmullrom_2.webp" width="640" height="380"/>
+&lt;p>En docker, podemos utilizar volúmenes para persistir datos incluso cuando los contenedores se destruyen. Estos volúmenes eran complejos de administrar en muchas circunstancias, por lo que docker ha creado una nueva funcionalidad para docker desktop, que nos permite crear backups de los volúmenes y compartirlos con otros usuarios de una forma sencilla.&lt;/p>
+&lt;p>&lt;img src="https://www.docker.com/wp-content/uploads/2022/09/share-volume-docker.png.webp" alt="Docker backups">&lt;/p>
+&lt;h2 id="cómo-funciona">¿Cómo funciona?&lt;/h2>
+&lt;p>Docker desktop empezó a ofrecer extensiones hace unos meses. Estas extensiones nos permiten añadir funcionalidades a docker desktop, como por ejemplo, gestión visual de logs, uso de disco, herramientas de desarrollo, seguridad, etc.&lt;/p>
+&lt;p>&lt;a href="https://www.youtube.com/watch?v=6je3tV-_7I0">Tengo un vídeo en youtube hablando de las extensiones de docker desktop&lt;/a>, si quieres saber más sobre ellas.&lt;/p>
+&lt;p>En este caso, la extensión que nos interesa es la de &lt;strong>Docker Backup&lt;/strong>. Esta extensión nos permite crear backups de los volúmenes de docker y compartirlos con otros usuarios de diferentes formas. Dentro vídeo:&lt;/p>
+&lt;div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+&lt;iframe src="https://www.youtube.com/embed/thqgLGMfsGw" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video">&lt;/iframe>
+&lt;/div>
+&lt;h2 id="comandos-utilizados">Comandos utilizados&lt;/h2>
+&lt;p>Crear el contenedor de postgresql para las pruebas:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>docker run --hostname&lt;span style="color:#f92672">=&lt;/span>cb8f628fbe6d --mac-address&lt;span style="color:#f92672">=&lt;/span>02:42:ac:11:00:02 --env&lt;span style="color:#f92672">=&lt;/span>POSTGRES_PASSWORD&lt;span style="color:#f92672">=&lt;/span>postgrespw --env&lt;span style="color:#f92672">=&lt;/span>PATH&lt;span style="color:#f92672">=&lt;/span>/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/lib/postgresql/15/bin --env&lt;span style="color:#f92672">=&lt;/span>GOSU_VERSION&lt;span style="color:#f92672">=&lt;/span>1.14 --env&lt;span style="color:#f92672">=&lt;/span>LANG&lt;span style="color:#f92672">=&lt;/span>en_US.utf8 --env&lt;span style="color:#f92672">=&lt;/span>PG_MAJOR&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">15&lt;/span> --env&lt;span style="color:#f92672">=&lt;/span>PG_VERSION&lt;span style="color:#f92672">=&lt;/span>15.1-1.pgdg110+1 --env&lt;span style="color:#f92672">=&lt;/span>PGDATA&lt;span style="color:#f92672">=&lt;/span>/var/lib/postgresql/data --volume&lt;span style="color:#f92672">=&lt;/span>/var/lib/postgresql/data -p &lt;span style="color:#ae81ff">5432&lt;/span> --label&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#39;com.docker/featured-image=postgres:latest&amp;#39;&lt;/span> --runtime&lt;span style="color:#f92672">=&lt;/span>runc -d postgres:latest
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Blog: ¿Docker desktop de pago?</title><link>/blog/2021/09/12/docker-desktop-de-pago/</link><pubDate>Sun, 12 Sep 2021 00:00:00 +0000</pubDate><guid>/blog/2021/09/12/docker-desktop-de-pago/</guid><description>
+&lt;img src="/blog/2021/09/12/docker-desktop-de-pago/featured_docker_desktop_planes_hu11fea927c14a98521cf9e3076a898257_134646_640x0_resize_catmullrom_3.png" width="640" height="304"/>
+&lt;p>La empresa Docker anunció la semana pasada los cambios en su modelo de negocio empresarial y &lt;strong>sus nuevos planes de subscripción para empresas&lt;/strong>.&lt;/p>
+&lt;p>Hasta el momento, la empresa ha sabido posicionarse como una de las más importantes en el mundo de la tecnología pero sin generar ningún tipo de ingreso.&lt;/p>
+&lt;p>Las nuevas versiones tendrán ciertas restricciones que forzarán a algunas empresas a utilizar las modalidades de pago.&lt;/p>
+&lt;figure class="card rounded p-2 td-post-card mb-4 mt-4" style="max-width: 710px">
+&lt;img class="card-img-top" src="/blog/2021/09/12/docker-desktop-de-pago/featured_docker_desktop_planes_hu11fea927c14a98521cf9e3076a898257_134646_700x450_fit_catmullrom_3.png" width="700" height="333">
+&lt;figcaption class="card-body px-0 pt-2 pb-0">
+&lt;p class="card-text">
+Planes de precios de Docker
+&lt;/p>
+&lt;/figcaption>
+&lt;/figure>
+&lt;p>Con el precio, todo hay que decirlo, ganamos muchas funcionalidades como SSO, escaneos de seguridad, builds en la nube, colaboración entre equipos&amp;hellip; etc. Podéis ver una lista completa de las funcionalidades en la &lt;a href="https://www.docker.com/pricing">página de Docker&lt;/a>.&lt;/p>
+&lt;h3 id="quién-tiene-que-pagar">¿Quién tiene que pagar?&lt;/h3>
+&lt;p>Las empresas que tengan &lt;strong>más de 250 empleados o unos ingresos anuales de 10 millones de dólares&lt;/strong> deberán utilizar los planes profesionales, de equipos o de empresa. Para dar margen a medianas y grandes empresas, las principales afectadas, se dará un periodo de gracia hasta el 31 de Enero de 2022.&lt;/p>
+&lt;p>Seguirá siendo totalmente gratuito en los siguientes casos:&lt;/p>
+&lt;ul>
+&lt;li>Pequeñas empresas con menos de 250 empleados y menos de 10 millones de dólares de ingresos anuales.&lt;/li>
+&lt;li>Uso personal.&lt;/li>
+&lt;li>Instituciones educativas.&lt;/li>
+&lt;li>Proyectos no comerciales open-source.&lt;/li>
+&lt;/ul>
+&lt;h3 id="qué-alternativas-tengo">¿Qué alternativas tengo?&lt;/h3>
+&lt;p>Estas nuevas políticas solo afecta a la versión de Docker Desktop, es decir, a la versión de Windows y Mac. En linux se utiliza Docker Engine al cuál no se le aplican estas restricciones.&lt;/p>
+&lt;p>Además, docker no es la única forma de construir contenedores. Existen otras tecnologías como &lt;strong>podman&lt;/strong> o &lt;strong>buildah&lt;/strong> que también nos permiten construir imágenes sin requerir un docker engine aunque estas también solo estan disponibles en Linux.&lt;/p></description></item></channel></rss>
